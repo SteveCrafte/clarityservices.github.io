@@ -24,25 +24,53 @@
             text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
         }
 
-        .feature-item {
-            transition: all 0.3s ease;
-            position: relative;
-            padding-left: 1rem;
-        }
+/* Remove the arrow completely */
+.feature-item::before {
+    content: ''; /* No content to generate the arrow */
+    position: absolute;
+    left: -1rem;
+    opacity: 0; /* Make sure it’s invisible */
+    transition: none; /* No transition */
+}
 
-        .feature-item:hover {
-            transform: translateX(10px);
-            color: #ff6b6b;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-        }
+/* Remove hover effects in the feature item */
+.feature-item {
+    position: relative;
+    padding-left: 1rem; /* Keep padding but no arrow */
+}
 
-        .feature-item::before {
-            content: '→';
-            position: absolute;
-            left: -1rem;
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
+/* Disable hover text animation */
+.feature-item:hover {
+    transform: none;
+    color: inherit;
+    text-shadow: none;
+}
+
+/* Remove the hover effect for text shadows */
+.hover-animate {
+    transition: none;
+}
+
+.hover-animate:hover {
+    transform: none;
+    text-shadow: none;
+}
+
+/* Slideshow related styling should not be affected */
+.slideshow-container,
+.slides-wrapper,
+.slide {
+    position: relative;
+    /* Ensure slideshow remains unaffected */
+}
+
+
+
+        /* Remove the arrows next to the text */
+.feature-item::before {
+    content: none; /* This will remove the arrow icon from the list items */
+}
+
 
         .feature-item:hover::before {
             opacity: 1;

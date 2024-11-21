@@ -205,9 +205,9 @@
 /* Initially, the logo is hidden and blurred */
 .main-logo {
     position: absolute;
-    top: 50%;           /* Center the logo vertically */
-    left: 50%;          /* Center the logo horizontally */
-    transform: translate(-55%, -50%); /* Move it slightly to the left */
+    top: 8rem;           /* Adjusted to position above the content-wrapper */
+    left: 50%;           /* Center the logo horizontally */
+    transform: translateX(-50%); /* Adjust it horizontally to be centered */
     width: 200px;
     height: 200px;
     transition: filter 0.5s ease, opacity 1s ease;
@@ -216,6 +216,7 @@
     visibility: hidden; /* Ensure the logo is not visible */
     z-index: 9999;      /* Make sure the logo is above all other elements */
 }
+
 
 
 

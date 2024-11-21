@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call of Duty: BO6/Warzone Menu - Clarity Services™</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
+            min-height: 100vh;
+            color: white;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .fog-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(0deg, rgba(255,0,0,0.15) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 10;
+            filter: blur(20px);
+            box-shadow: 0 -10px 50px rgba(255,0,0,0.2);
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 10px currentColor;
+            animation: smoothGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes smoothGlow {
+            0% { text-shadow: 0 0 5px currentColor; }
+            50% { text-shadow: 0 0 15px currentColor, 0 0 20px red; }
+            100% { text-shadow: 0 0 5px currentColor; }
+        }
+        
+        .god-rays {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .ray {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 0, 0, 0.2), transparent);
+            animation: ray-animation 8s infinite;
+        }
+        
+        .ray:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .ray:nth-child(2) { left: 40%; animation-delay: 2s; }
+        .ray:nth-child(3) { left: 60%; animation-delay: 4s; }
+        .ray:nth-child(4) { left: 80%; animation-delay: 6s; }
+        .ray:nth-child(5) { left: 90%; animation-delay: 8s; }
+        
+        @keyframes ray-animation {
+            0% { transform: translateY(-100%); opacity: 0; }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.3; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .slides-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            display: block;
+            opacity: 1;
+        }
+
+        .slide-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            border-radius: 50%;
+        }
+
+        .slide-arrow:hover {
+            background: rgba(255, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+
+        .slide-arrow.prev { left: 15px; }
+        .slide-arrow.next { right: 15px; }
+
+        .arrow-icon {
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+
+        .arrow-icon::before,
+        .arrow-icon::after {
+            content: '';
+            position: absolute;
+            background: white;
+            height: 2px;
+            width: 12px;
+        }
+
+        .prev .arrow-icon::before {
+            transform: rotate(-45deg);
+            top: 25%;
+            left: 25%;
+        }
+
+        .prev .arrow-icon::after {
+            transform: rotate(45deg);
+            top: 65%;
+            left: 25%;
+        }
+
+        .next .arrow-icon::before {
+            transform: rotate(45deg);
+            top: 25%;
+            right: 25%;
+        }
+
+        .next .arrow-icon::after {
+            transform: rotate(-45deg);
+            top: 65%;
+            right: 25%;
+        }
+
+        .glow-button {
+            animation: smoothButtonGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes smoothButtonGlow {
+            0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); }
+            100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
+        }
+    </style>
+</head>
+<body>
+    <div class="god-rays">
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+    </div>
+
+    <div class="fog-container"></div>
+
+    <div class="container mx-auto px-4 py-8">
+        <a href="index.html" class="text-red-500 hover:text-red-400 mb-8 inline-block transition-colors duration-300 animate__animated animate__fadeInLeft">← Back to Mods</a>
+        
+        <div class="bg-black bg-opacity-50 rounded-lg p-8 border border-red-700">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Slideshow Section -->
+                <div class="space-y-4">
+                    <div class="slideshow-container">
+                        <div class="slides-wrapper" id="slidesWrapper">
+                            <div class="slide">
+                                <img src="https://i.postimg.cc/BvJ87DgJ/blackops6menu.webp" alt="Call of Duty: BO6/Warzone Menu 1" class="w-full object-cover h-80"/>
+                            </div>
+                            <div class="slide">
+                                <img src="https://i.postimg.cc/FK2K5Lbf/Our-BO6-Call-of-Duty-product-features.webp" alt="Call of Duty: BO6/Warzone Menu 2" class="w-full object-cover h-80"/>
+                            </div>
+                            <div class="slide">
+                                <img src="https://i.postimg.cc/2j9Kz7bX/Best-Aimbot-Cheat-for-Black-Ops-6.webp" alt="Call of Duty: BO6/Warzone Menu 3" class="w-full object-cover h-80"/>
+                            </div>
+                        </div>
+                        
+                        <button class="slide-arrow prev" onclick="changeSlide(-1)">
+                            <span class="arrow-icon"></span>
+                        </button>
+                        <button class="slide-arrow next" onclick="changeSlide(1)">
+                            <span class="arrow-icon"></span>
+                        </button>
+                    </div>
+                    
+                    <!-- Image Description -->
+                    <div class="bg-black bg-opacity-50 p-4 rounded-lg border border-red-700">
+                        <p class="text-gray-300" id="slideDescription">
+                           The BO6/Warzone tool provides an extensive array of advanced features and functionalities designed to enhance your gaming experience. These features include silent injection for discreet and seamless operation, ESP (Extra Sensory Perception) for improved situational awareness, and an aimbot for precise targeting. Additionally, it offers a money hack to boost in-game resources, a radar hack to detect opponents' locations, and a variety of other powerful options to give you a competitive edge.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="space-y-6">
+                    <div>
+                        <h1 class="text-3xl font-bold text-red-500 text-glow mb-2 animate__animated animate__fadeInDown">Call of Duty: BO6/Warzone Menu</h1>
+                        <p class="text-red-400 animate__animated animate__fadeInDown animate__delay-0.5s">By ClarityServices™</p>
+                    </div>
+
+                    <div class="flex items-center space-x-4 animate__animated animate__fadeInUp animate__delay-1s">
+                        <div class="flex items-center">
+                            <span class="text-red-500 animate-pulse-slow">★</span>
+                            <span class="ml-1 text-red-400">3.4</span>
+                        </div>
+                        <span class="text-red-700">•</span>
+                        <span class="text-red-400">1.2K+ Downloads</span>
+                        <span class="bg-red-900 px-3 py-1 rounded-full text-sm animate-pulse-slow">v1.8</span>
+                    </div>
+
+                    <div class="space-y-4 animate__animated animate__fadeInUp animate__delay-1.5s">
+                        <div>
+                            <h2 class="text-xl font-semibold text-red-500 text-glow mb-2">Description</h2>
+                            <p class="text-gray-300 text-lg">
+                                The BO6/Warzone tool offers a wide range of features, including silent injection, ESP/aimbot, and much more.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-red-500 text-glow mb-2">Key Features</h3>
+                            <ul class="text-gray-300 space-y-2 list-disc pl-5">
+                                <li>Deep Clean + Silent injection</li>
+				<li>Auto Detects tracer files. Deltes</li>
+				<li>*LIMITED* Ray Gun ( Warzone Only )</li> 
+				<li>Radar Hack</li>
+                                <li>ESP/aimbot</li>
+                                <li>Rapid fire</li>
+                                <li>No recoil</li>
+                                <li>Unlock all</li>
+				<li>Aimbot FOV/Radius</li>
+				<li>Aimbot Smoothing</li>
+				<li>Aimbot Lock Delay</li>
+				<li>Hitbox/Bone Selection</li>
+				<li>Ignore Knockouts</li>
+				<li>Visibility Check</li>
+				<li>Bullet Drop Prediction</li>
+				<li>Aimbot Key Selection</li>
+				<li>Mouse/Controller Support</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-red-500 text-glow mb-2">System Requirements</h3>
+                            <ul class="text-gray-300 space-y-2 list-disc pl-5">
+                                <li>Windows 10/11 (64-bit)</li>
+                                <li>Latest GPU drivers</li>
+                                <li>Administrator access</li>
+                                <li>Anti-virus disabled during installation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex space-x-4 animate__animated animate__fadeInUp animate__delay-2s">
+                        <a href="https://example.com/cod-menu.zip" target="_blank"
+                           class="glow-button bg-red-800 hover:bg-red-900 px-8 py-3 rounded-lg text-white font-semibold transition-all duration-300 transform hover:-translate-y-1">
+                            Download Now
+                        </a>
+                        <button onclick="showInstallGuide()"
+                                class="glow-button bg-red-800 hover:bg-red-900 px-8 py-3 rounded-lg text-white font-semibold transition-all duration-300 transform hover:-translate-y-1">
+                            Installation Guide
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        const slidesWrapper = document.getElementById('slidesWrapper');
+        const descriptions = [
+            "The BO6/Warzone tool provides an extensive array of advanced features and functionalities designed to enhance your gaming experience. These features include silent injection for discreet and seamless operation, ESP (Extra Sensory Perception) for improved situational awareness, and an aimbot for precise targeting. Additionally, it offers a money hack to boost in-game resources, a radar hack to detect opponents' locations, and a variety of other powerful options to give you a competitive edge.",
+            "Clarity Cheats offers the ultimate tool for BO6/Warzone, setting a new standard in performance and reliability. Our tool is meticulously crafted to deliver unmatched precision and functionality, featuring cutting-edge options like silent injection, ESP, aimbot, money hack, and radar hack. What truly sets Clarity Cheats apart is our commitment to providing seamless integration, undetectable operation, and consistent updates to stay ahead of anti-cheat systems. With an intuitive interface and unparalleled customer support, Clarity Cheats ensures you always have the upper hand in every match.",
+            "The configuration panel for our game modifications is designed to provide unparalleled control and customization. It allows users to fine-tune every aspect of the tool, including ESP settings, aimbot precision, radar functionality, and more. With an intuitive and user-friendly interface, the panel ensures that both beginners and experienced users can effortlessly adjust settings to match their playstyle. Additionally, advanced features like real-time toggles and preset profiles make it easy to adapt to any gaming scenario, offering flexibility and precision at your fingertips."
+        ];
+
+        function changeSlide(direction) {
+            const slides = document.getElementsByClassName('slide');
+            slideIndex = (slideIndex + direction + slides.length) % slides.length;
+            
+            // Smooth slide transition
+            slidesWrapper.style.transform = `translateX(-${slideIndex * 100}%)`;
+            
+            // Update description
+            document.getElementById("slideDescription").textContent = descriptions[slideIndex];
+        }
+
+        function showInstallGuide() {
+            alert("Installation Guide:\n\n1. Download the launcher\n2. Run as administrator\n3. Follow the setup wizard\n4. Launch the game and press INSERT to open the menu");
+        }
+
+        // Apply glow effect to text elements with the "text-glow" class
+        document.querySelectorAll('.text-glow').forEach(element => {
+            element.classList.add('animate__animated', 'animate__infinite', 'animate__zoomIn');
+        });
+
+        // Apply pulse animation to elements with the "animate-pulse-slow" class
+        document.querySelectorAll('.animate-pulse-slow').forEach(element => {
+            element.classList.add('animate__animated', 'animate__infinite', 'animate__pulse');
+        });
+
+        // Apply fade-in animations to other elements
+        document.querySelectorAll('.animate__animated').forEach(element => {
+            element.classList.add('animate__fadeIn');
+        });
+    </script>
+</body>
+</html>

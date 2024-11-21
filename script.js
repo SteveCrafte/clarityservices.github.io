@@ -2,13 +2,13 @@
 let mods = [
     {
         id: 1,                    
-        title: "Clarity's Fortnite Menu", 
+        title: "Fortnite Menu", 
         author: "ClarityServices™",      
         version: "v2.1",          
-        description: "A silent Fortnite launcher with the latest and most up-to-date detection settings, ensuring 100% undetectability.", 
-        rating: 3.7,              
-        downloads: 2000,         
-        date: "2024-03-18",       
+        description: "Fortnite launcher with the latest and most up-to-date detection settings. This menu has basic silent injection ensuring 100% undetectability.", 
+        rating: 4.1,              
+        downloads: 1200,         
+        date: "2024-01-18",       
         image: "https://i.postimg.cc/MKT30Dd7/Fortnite.png",  
         downloadUrl: "https://gofile.io/d/O1OasU"  
     },
@@ -17,24 +17,24 @@ let mods = [
         title: "Call of Duty: BO6/Warzone Menu",
         author: "ClarityServices™",
         version: "v1.8",
-        description: "The BO6/Warzone tool offers a wide range of features, including silent injection, ESP/aimbot, and much more.",
-        rating: 3.4,
+        description: "Our BO6/Warzone tool offers a hide variety of features, including silent injection, ESP/aimbot, radar HACK and more. We also offer camo services if interested",
+        rating: 3.9,
         downloads: 1200,
         date: "2024-05-15",
         image: "https://i.postimg.cc/MZ4V4mzb/blackops6.png",
-        downloadUrl: "https://example.com/cod-menu.zip"
+        downloadUrl: "https://gofile.io/d/5MSaxP"
     },    
     {
         id: 3,
         title: "*NEW* HWID Spoofer",
         author: "ClarityServices™",
         version: "v1.2",
-        description: "The most effective and undetectable spoofer on the market. EAC/BAC FULL BIOS SPOOF. Check out Claritys HWID Spoofer today.",
+        description: "The most effective and undetectable spoofer on the market. EAC/BAC FULL BIOS SPOOF. Unban/Circumvent shadow lobbys. Full Root!",
         rating: 3.4,
-        downloads: 4000,
-        date: "2024-09-02",
+        downloads: 1000,
+        date: "2024-11-4",
         image: "https://i.postimg.cc/qRWc8sRL/HWIDSPOOFER.png",
-        downloadUrl: "https://example.com/hwid-spoofer.zip"
+        downloadUrl: "https://gofile.io/d/M1ElNC"
     }    
 ];
 
@@ -44,11 +44,12 @@ let updates = [
         id: 1,
         modId: 1,
         version: "v2.1",
-        date: "2024-03-18",
+        date: "2024-11-6",
         changes: [
-            "Added weapon customization/Unlock all",
-            "Fixed crash when loading into older Windows systems",
+            "Added weapon customization/Unlock all tool",
+            "Fixed crash when loading into older Windows systems, DE-BUG allow for GUI color scheme differentials",
             "Improved performance in FPS/general build quality of system BIOS"
+          
         ]
     },
     {
@@ -57,10 +58,10 @@ let updates = [
         version: "v1.5",
         date: "2024-10-15",
         changes: [
-            "Update to silent injection script",
-            "Added normal option for ESP",
+            "Update to our silent injection script/faster load speeds, less detection",
+            "Added normal option output option for ESP",
             "Fixed bug causing menu to not appear in-game",
-            "Added Ray Gun"
+            "Added Ray Gun for Warzone *TEMPORARILY*"
         ]
     }
 ];
@@ -74,6 +75,30 @@ let reviews = [
         rating: 4,
         comment: "Easy install, good support, +5 Rep",
         date: "2024-11-17"
+    },
+    {
+        id: 3,
+        username: "AverageJoeMama",
+        modId: 3,
+        rating: 5,
+        comment: "lved the update to the spoofer so much i had to leave a review man, i can actaully play valroant again *CRY EMOJI* lmao tyyyy",
+        date: "2023-12-13"
+    },
+    {
+        id: 2,
+        username: "benvmo",
+        modId: 2,
+        rating: 5,
+        comment: "I was hella worried this wasnt going to work, but i got a email back about my issues and got it working so im here to pay my respect",
+        date: "2022-1-10"
+    },
+        {
+        id: 1,
+        username: "Khazixxxx",
+        modId: 1,
+        rating: 5,
+        comment: "Best site i have found, i will be back again, gonna try the cod cheat",
+        date: "2023-12-13"
     },
     {
         id: 2,
@@ -135,13 +160,13 @@ function createModCard(mod) {
                 <p class="text-sm text-gray-300 mb-4 hover:text-red-400 transition-colors duration-300">${mod.description}</p>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center space-x-2">
-                        <span class="text-red-500 animate__animated animate__pulse animate__infinite">★</span>
+                        <span class="text-red-500 animate-pulse-slow">★</span>
                         <span class="text-red-400">${mod.rating}</span>
                         <span class="text-red-700">•</span>
                         <span class="text-red-400">${(mod.downloads/1000).toFixed(0)}K+</span>
                     </div>
                     <button onclick="viewMod(${mod.id})" 
-                            class="bg-red-800 hover:bg-red-900 px-3 py-1 rounded text-sm text-white transition-all duration-300 hover:shadow-lg hover:shadow-red-500/50 transform hover:-translate-y-1">
+                            class="bg-red-800 hover:bg-red-900 px-3 py-1 rounded text-sm text-white transition-all duration-300 hover:shadow-lg hover:shadow-red-500/50 transform hover:-translate-y-1 glow-button">
                         View More
                     </button>
                 </div>
@@ -159,9 +184,14 @@ function viewMod(modId) {
         return;
     }
 
-    // Implement your view mod logic here
-    // For example, you can open a modal or navigate to a mod details page
-    console.log(`Viewing mod: ${mod.title}`);
+    // Redirect based on mod ID
+    if (modId === 1) {
+        window.location.href = 'fortnite.html';
+    } else if (modId === 2) {
+        window.location.href = 'cod.html';
+    } else if (modId === 3) {
+        window.location.href = 'spoofer.html';
+    }
 }
 
 // ===== UPDATE CARD CREATION =====

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mods Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        body {
+            background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
+            min-height: 100vh;
+            color: white;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* God Rays Effect */
+        .god-rays {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.5;
+        }
+
+        .ray {
+            position: absolute;
+            width: 100px;
+            height: 1000px;
+            background: linear-gradient(180deg, rgba(255,0,0,0.1) 0%, rgba(255,0,0,0) 100%);
+            transform-origin: top;
+            animation: rayAnimation 8s infinite linear;
+            filter: blur(4px);
+        }
+
+        .ray:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .ray:nth-child(2) { left: 30%; animation-delay: -2s; }
+        .ray:nth-child(3) { left: 50%; animation-delay: -4s; }
+        .ray:nth-child(4) { left: 70%; animation-delay: -6s; }
+        .ray:nth-child(5) { left: 90%; animation-delay: -8s; }
+
+        @keyframes rayAnimation {
+            0% {
+                transform: rotate(0deg) translateY(-100%);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.2;
+            }
+            80% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: rotate(45deg) translateY(100%);
+                opacity: 0;
+            }
+        }
+
+        /* Glow Effects */
+        .card-hover {
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .card-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 0.5rem;
+            background: linear-gradient(45deg, #ff0000, #660000);
+            z-index: -1;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .card-hover:hover::before {
+            opacity: 0.3;
+            filter: blur(20px);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        }
+
+        /* Particle Effect */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(3px);
+            opacity: 0.7;
+        }
+
+        /* Content Positioning */
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Pulse Animation */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #660000;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #990000;
+        }
+
+        /* Enhanced Card Styles */
+        .stats-card {
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+        }
+
+        /* Text Shadow Effect */
+        .text-glow {
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        /* Scrollable Reviews Section */
+        .reviews-section {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .reviews-section::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .reviews-section::-webkit-scrollbar-track {
+            background: #000000;
+        }
+
+        .reviews-section::-webkit-scrollbar-thumb {
+            background: #660000;
+            border-radius: 5px;
+        }
+
+        .reviews-section::-webkit-scrollbar-thumb:hover {
+            background: #990000;
+        }
+    </style>
+</head>
+<body>
+    <!-- God Rays -->
+    <div class="god-rays">
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+    </div>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Main Content -->
+    <div class="content-wrapper container mx-auto px-4 py-8">
+        <!-- Mods Section -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-500 text-glow">Mods</h2>
+                <select id="sortSelect" class="bg-black bg-opacity-70 text-red-400 border border-red-700 rounded px-2 py-1">
+                    <option value="popular">Most Popular</option>
+                    <option value="latest">Latest</option>
+                    <option value="rating">Highest Rated</option>
+                </select>
+            </div>
+            <div id="modsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+
+        <!-- Updates Section -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-red-500 text-glow mb-4">Latest Updates</h2>
+            <div id="updatesContainer" class="space-y-4"></div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-500 text-glow">Reviews</h2>
+                <select id="reviewSort" class="bg-black bg-opacity-70 text-red-400 border border-red-700 rounded px-2 py-1">
+                    <option value="recent">Most Recent</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="oldest">Oldest First</option>
+                </select>
+            </div>
+            <div class="reviews-section">
+                <div id="reviewsContainer" class="space-y-4"></div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="grid grid-cols-3 gap-4 mt-8">
+            <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
+                <h2 class="text-red-500 text-xl font-bold text-glow" id="totalDownloads">0K+</h2>
+                <p class="text-red-400">Total Downloads</p>
+            </div>
+            <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
+                <h2 class="text-red-500 text-xl font-bold text-glow" id="averageRating">0.0</h2>
+                <p class="text-red-400">Average Rating</p>
+            </div>
+            <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
+                <h2 class="text-red-500 text-xl font-bold text-glow" id="totalMods">0</h2>
+                <p class="text-red-400">Total Mods</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 40,
+                    "density": {
+                        "enable": true,
+                        "value_area": 1000
+                    }
+                },
+                "color": {
+                    "value": "#ff0000"
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 4,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 200,
+                    "color": "#ff0000",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "bubble"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "bubble": {
+                        "distance": 200,
+                        "size": 6,
+                        "duration": 2,
+                        "opacity": 0.2,
+                        "speed": 3
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

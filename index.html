@@ -110,6 +110,9 @@
             position: relative;
             z-index: 2;
             backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding-top: 8rem;
         }
 
         /* Pulse Animation */
@@ -147,7 +150,7 @@
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-            height: 300px;
+            max-height: 300px;
             overflow-y: auto;
             scrollbar-width: none;
             -ms-overflow-style: none;
@@ -158,67 +161,81 @@
         }
 
         .reviews-section .review-star {
-            color: #ffd700;
+            color: #ffff00 !important;
         }
 
-        /* Centered Image */
-        .centered-image {
-            position: absolute;
-            top: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 200px;
-            z-index: 3;
-            animation: fadeInImage 1s ease-in-out;
+        /* Landing Page Styles */
+        .landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
         }
 
-        @keyframes fadeInImage {
+        .landing-page.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .landing-page .centered-image {
+            width: 400px;
+            height: 400px;
+            animation: zoomIn 0.5s ease;
+        }
+
+        @keyframes zoomIn {
             0% {
+                transform: scale(0.5);
                 opacity: 0;
-                transform: translate(-50%, -20%);
             }
             100% {
+                transform: scale(1);
                 opacity: 1;
-                transform: translate(-50%, 0);
             }
         }
 
-        /* Version and Status Indicator */
-        .version-status {
-            display: flex;
-            align-items: center;
-            font-size: 0.75rem;
-            color: #ddd;
+        .main-logo {
             position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
+            top: 2.5rem;
+            left: 40%;
+            transform: translateX(-40%);
+            width: 200px;
+            height: 200px;
+            transition: filter 0.5s ease, transform 0.5s ease;
+            filter: none;
         }
 
-        .version-status .version {
-            margin-right: 0.5rem;
-            background-color: #660000;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-weight: bold;
+        .main-logo.unblurred {
+            filter: none;
+            transform: translateX(-40%);
         }
 
-        .version-status .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #00ff00;
-            margin-right: 0.25rem;
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 8px 0 #00ff00;
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        .version-status .status {
-            font-weight: bold;
+        .section-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
+    <!-- Landing Page -->
+    <div class="landing-page" id="landing-page">
+        <img src="https://i.postimg.cc/RhRzN5c5/istockphoto-1308291476-612x612.png" alt="Clarity Services" class="centered-image">
+    </div>
+
     <!-- God Rays -->
     <div class="god-rays">
         <div class="ray"></div>
@@ -232,12 +249,12 @@
     <div id="particles-js"></div>
 
     <!-- Centered Image -->
-    <img src="https://i.postimg.cc/RhRzN5c5/istockphoto-1308291476-612x612.png" alt="Clarity Services" class="centered-image animate__animated animate__fadeInDown">
+    <img src="https://i.postimg.cc/RhRzN5c5/istockphoto-1308291476-612x612.png" alt="Clarity Services" class="main-logo animate__animated animate__fadeInDown" id="logo">
 
     <!-- Main Content -->
-    <div class="content-wrapper container mx-auto px-4 py-40">
+    <div class="content-wrapper container mx-auto px-4">
         <!-- Mods Section -->
-        <div class="mb-12 animate__animated animate__fadeInUp animate__delay-0.5s">
+        <div class="mb-12 section-reveal">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold text-red-500">Mods</h2>
                 <select id="sortSelect" class="bg-black bg-opacity-70 text-red-400 border border-red-700 rounded px-2 py-1 animate__animated animate__fadeInRight animate__delay-1s">
@@ -246,17 +263,17 @@
                     <option value="rating">Highest Rated</option>
                 </select>
             </div>
-            <div id="modsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate__animated animate__fadeInUp animate__delay-1.5s"></div>
+            <div id="modsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 section-reveal animate__animated animate__fadeInUp animate__delay-1.5s"></div>
         </div>
 
         <!-- Updates Section -->
-        <div class="mb-12 animate__animated animate__fadeInUp animate__delay-0.5s">
+        <div class="mb-12 section-reveal">
             <h2 class="text-2xl font-bold text-red-500 mb-4">Latest Updates</h2>
-            <div id="updatesContainer" class="space-y-6"></div>
+            <div id="updatesContainer" class="space-y-6 section-reveal"></div>
         </div>
 
         <!-- Reviews Section -->
-        <div class="mb-12 animate__animated animate__fadeInUp animate__delay-0.5s">
+        <div class="mb-12 section-reveal">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold text-red-500">Reviews</h2>
                 <select id="reviewSort" class="bg-black bg-opacity-70 text-red-400 border border-red-700 rounded px-2 py-1 animate__animated animate__fadeInRight animate__delay-1s">
@@ -265,7 +282,7 @@
                     <option value="oldest">Oldest First</option>
                 </select>
             </div>
-            <div class="reviews-section animate__animated animate__fadeInUp animate__delay-1.5s" id="reviewsSection">
+            <div class="reviews-section section-reveal animate__animated animate__fadeInUp animate__delay-1.5s" id="reviewsSection">
                 <div id="reviewsContainer" class="space-y-4"></div>
             </div>
         </div>
@@ -298,6 +315,14 @@
         // Play welcome sound on page load
         window.addEventListener('load', () => {
             welcomeSound.play();
+            setTimeout(() => {
+                document.getElementById('landing-page').classList.add('hidden');
+                document.getElementById('logo').classList.add('unblurred');
+                document.querySelector('.content-wrapper').style.opacity = '1';
+                document.querySelectorAll('.section-reveal').forEach(section => {
+                    section.classList.add('visible');
+                });
+            }, 1000);
         });
 
         // Play hover sound on card hover

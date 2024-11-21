@@ -202,7 +202,7 @@
             }
         }
 
-/* Initially, the logo is blurred and hidden */
+/* Initially, the logo is hidden and blurred */
 .main-logo {
     position: absolute;
     top: 1rem;  /* Move logo up */
@@ -210,9 +210,10 @@
     transform: translateX(-40%);  /* Keep the logo centered */
     width: 200px;
     height: 200px;
-    transition: filter 0.5s ease, opacity 1s ease;  /* Smooth transitions */
+    transition: filter 0.5s ease, opacity 1s ease;
     filter: blur(10px);  /* Start with the logo blurred */
     opacity: 0;  /* Make the logo hidden initially */
+    visibility: hidden;  /* Ensure the logo is not visible */
     z-index: 9999;  /* Make sure the logo is above all other elements */
 }
 
@@ -220,7 +221,9 @@
 .main-logo.unblurred {
     filter: none !important;  /* Remove blur */
     opacity: 1;  /* Make the logo visible */
+    visibility: visible;  /* Ensure the logo becomes visible */
 }
+
 
 
 

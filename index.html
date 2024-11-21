@@ -202,16 +202,29 @@
             }
         }
 
-        .main-logo {
-            position: absolute;
-            top: 2.5rem;
-            left: 40%;
-            transform: translateX(-40%);
-            width: 200px;
-            height: 200px;
-            transition: filter 0.5s ease, transform 0.5s ease;
-            filter: none;
-        }
+/* Initially, the logo is hidden and blurred */
+.main-logo {
+    position: absolute;
+    top: 1rem;  /* Move logo up */
+    left: 54%;  /* Move logo a bit more to the left */
+    transform: translateX(-50%);  /* Keep the logo centered horizontally */
+    width: 200px;
+    height: 200px;
+    transition: filter 0.5s ease, opacity 1s ease;
+    filter: blur(10px);  /* Start with the logo blurred */
+    opacity: 0;  /* Make the logo hidden initially */
+    visibility: hidden;  /* Ensure the logo is not visible */
+    z-index: 9999;  /* Make sure the logo is above all other elements */
+}
+
+/* When the landing page disappears, logo becomes unblurred and visible */
+.main-logo.unblurred {
+    filter: none !important;  /* Remove the blur */
+    opacity: 1;  /* Make the logo visible */
+    visibility: visible;  /* Ensure the logo becomes visible */
+    left: 41%;  /* Adjust left to move it more to the left */
+    transform: translateX(-50%);  /* Keep it centered around 50% */
+}
 
         .main-logo.unblurred {
             filter: none;
@@ -313,17 +326,30 @@
         const welcomeSound = new Audio('welcome-sound.mp3');
 
         // Play welcome sound on page load
-        window.addEventListener('load', () => {
-            welcomeSound.play();
-            setTimeout(() => {
-                document.getElementById('landing-page').classList.add('hidden');
-                document.getElementById('logo').classList.add('unblurred');
-                document.querySelector('.content-wrapper').style.opacity = '1';
-                document.querySelectorAll('.section-reveal').forEach(section => {
-                    section.classList.add('visible');
-                });
-            }, 1000);
+      window.addEventListener('load', () => {
+    // Play welcome sound on page load
+    welcomeSound.play();
+    
+    // Delay to hide the landing page and reveal the logo
+    setTimeout(() => {
+        // Hide the landing page after 1 second
+        document.getElementById('landing-page').classList.add('hidden');
+        
+        // Unblur the logo and make it visible
+        const logo = document.getElementById('logo');
+        logo.classList.add('unblurred');
+        
+        // Show the rest of the content
+        document.querySelector('.content-wrapper').style.opacity = '1';
+        
+        // Reveal each section with animations
+        document.querySelectorAll('.section-reveal').forEach(section => {
+            section.classList.add('visible');
         });
+    }, 1000);  // Delay for 1 second before triggering the changes
+});
+
+
 
         // Play hover sound on card hover
         document.querySelectorAll('.card-hover').forEach(card => {

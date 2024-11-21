@@ -204,18 +204,19 @@
 
 /* Initially, the logo is hidden and blurred */
 .main-logo {
-    position: fixed;              /* Fixed position at the top of the page */
-    top: 0;                        /* Align it to the top */
-    left: 50%;                     /* Center horizontally */
-    transform: translateX(-45%);   /* Adjust slightly to the left */
-    width: 200px;                  /* Set the width of the logo */
-    height: 200px;                 /* Set the height of the logo */
-    z-index: 9999;                 /* Ensure it's on top of other elements */
+    position: fixed;               /* Fixed position at the top of the page */
+    top: 20px;                      /* Move the logo a bit down (adjust this value as needed) */
+    left: 50%;                      /* Center horizontally */
+    transform: translateX(-40%);    /* Adjust slightly to the right */
+    width: 200px;                   /* Set the width of the logo */
+    height: 200px;                  /* Set the height of the logo */
+    z-index: 9999;                  /* Ensure it's on top of other elements */
     transition: filter 0.5s ease, opacity 1s ease;
-    filter: blur(10px);            /* Add blur effect */
-    opacity: 0;                    /* Initially hide the logo */
-    visibility: hidden;            /* Hide the logo initially */
+    filter: blur(10px);             /* Add blur effect */
+    opacity: 0;                     /* Initially hide the logo */
+    visibility: hidden;             /* Hide the logo initially */
 }
+
 
 
 

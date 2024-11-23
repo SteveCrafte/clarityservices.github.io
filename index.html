@@ -3,14 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clarity Services</title>
+    <title>Clarity Services - Redirecting</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <script>
-        // This line changes how the URL appears
-        window.onload = function() {
-            window.history.pushState('', '', '/ClarityServices.shop');
-        }
-    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -79,7 +73,27 @@
             position: relative;
             z-index: 2;
         }
+
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+        }
     </style>
+    <script>
+        window.onload = function() {
+            // Set custom URL display
+            window.history.pushState({}, '', '/ClarityServices.shop.com');
+            
+            // Your target URL - change this to your actual destination
+            const targetUrl = "const targetUrl = "https://your-target-site.com";";
+            
+            // Redirect after showing animation (5 seconds)
+            setTimeout(function() {
+                window.location.href = targetUrl;
+            }, 5000);
+        };
+    </script>
 </head>
 <body>
     <div id="landing-page" class="landing-page">

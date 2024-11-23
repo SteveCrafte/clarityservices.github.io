@@ -5,7 +5,7 @@ let mods = [
         title: "Fortnite Menu", 
         author: "ClarityServices™",      
         version: "v2.1",          
-        description: "Fortnite launcher with the latest and most up-to-date detection settings. This menu has basic silent injection ensuring 100% undetectability.", 
+        description: "Fortnite launcher with the latest and most up-to-date detection settings. This menu has basic silent injection ensuring 100% undetectability. We make sure to keep this tool updated as it's one of our most popular tools.", 
         rating: 4.1,              
         downloads: 1200,         
         date: "2024-01-18",       
@@ -17,7 +17,7 @@ let mods = [
         title: "Call of Duty: BO6/Warzone Menu",
         author: "ClarityServices™",
         version: "v1.8",
-        description: "Our BO6/Warzone tool offers a hide variety of features, including silent injection, ESP/aimbot, radar HACK and more. We also offer camo services if interested",
+        description: "Our BO6/Warzone tool offers a hide variety of features, including silent injection, ESP/aimbot, Radar HACK, GOD Mode, Speed HACK and more. We also offer max prestige/camo services and bot lobby if you are interested.",
         rating: 3.9,
         downloads: 1200,
         date: "2024-05-15",
@@ -29,7 +29,7 @@ let mods = [
         title: "*NEW* HWID Spoofer",
         author: "ClarityServices™",
         version: "v1.2",
-        description: "The most effective and undetectable spoofer on the market. EAC/BAC FULL BIOS SPOOF. Unban/Circumvent shadow lobbys. Full Root!",
+        description: "The most effective and undetectable spoofer on the market. EAC/BAC FULL BIOS SPOOF. Unban/Circumvent shadow lobbys and get alerts for shawdow updates and other player tools. Full Root!",
         rating: 3.4,
         downloads: 1000,
         date: "2024-11-4",
@@ -49,7 +49,6 @@ let updates = [
             "Added weapon customization/Unlock all tool",
             "Fixed crash when loading into older Windows systems, DE-BUG allow for GUI color scheme differentials",
             "Improved performance in FPS/general build quality of system BIOS"
-          
         ]
     },
     {
@@ -92,7 +91,7 @@ let reviews = [
         comment: "I was hella worried this wasnt going to work, but i got a email back about my issues and got it working so im here to pay my respect",
         date: "2022-1-10"
     },
-        {
+    {
         id: 1,
         username: "Khazixxxx",
         modId: 1,
@@ -145,28 +144,29 @@ let reviews = [
 // ===== MOD CARD CREATION =====
 function createModCard(mod) {
     return `
-        <div class="card-hover bg-black bg-opacity-50 rounded-lg overflow-hidden border border-red-700 hover:border-red-500 transition-all duration-300">
+        <div class="card-hover bg-black bg-opacity-50 rounded-lg overflow-hidden border border-red-700 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300">
             <div class="relative">
                 <img src="${mod.image}" alt="${mod.title}" class="w-full h-40 object-cover transform hover:scale-105 transition-transform duration-300"/>
-                <div class="absolute top-2 right-2">
-                    <span class="bg-red-900 px-2 py-0.5 rounded-full text-xs text-white animate__animated animate__pulse animate__infinite">${mod.version}</span>
+                <div class="absolute top-2 right-2 flex items-center space-x-2">
+                    <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-lg shadow-green-500/80" 
+                         style="box-shadow: 0 0 10px #22c55e, 0 0 20px #22c55e, 0 0 30px #22c55e;"></div>
+                    <span class="bg-red-900 px-2 py-0.5 rounded-full text-xs text-white">${mod.version}</span>
                 </div>
             </div>
             <div class="p-4">
                 <div class="mb-2">
                     <h3 class="text-lg font-semibold text-red-500 hover:text-red-400 transition-colors duration-300">${mod.title}</h3>
-                    <p class="text-xs text-red-400">By ${mod.author}</p>
+                    <p class="text-xs text-gray-500 opacity-60">By ${mod.author}</p>
                 </div>
                 <p class="text-sm text-gray-300 mb-4 hover:text-red-400 transition-colors duration-300">${mod.description}</p>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center space-x-2">
-                        <span class="text-red-500 animate-pulse-slow">★</span>
-                        <span class="text-red-400">${mod.rating}</span>
+                        <span class="text-yellow-400 text-glow">${mod.rating}</span>
                         <span class="text-red-700">•</span>
                         <span class="text-red-400">${(mod.downloads/1000).toFixed(0)}K+</span>
                     </div>
                     <button onclick="viewMod(${mod.id})" 
-                            class="bg-red-800 hover:bg-red-900 px-3 py-1 rounded text-sm text-white transition-all duration-300 hover:shadow-lg hover:shadow-red-500/50 transform hover:-translate-y-1 glow-button">
+                            class="bg-red-800 hover:bg-red-900 hover:shadow-lg hover:shadow-red-500/50 px-3 py-1 rounded text-sm text-white transition-all duration-300 transform hover:-translate-y-1 glow-button">
                         View More
                     </button>
                 </div>
@@ -175,35 +175,16 @@ function createModCard(mod) {
     `;
 }
 
-// ===== VIEW MOD FUNCTION =====
-function viewMod(modId) {
-    const mod = mods.find(m => m.id === modId);
-    
-    if (!mod) {
-        console.error(`Mod with ID ${modId} not found`);
-        return;
-    }
-
-    // Redirect based on mod ID
-    if (modId === 1) {
-        window.location.href = 'fortnite.html';
-    } else if (modId === 2) {
-        window.location.href = 'cod.html';
-    } else if (modId === 3) {
-        window.location.href = 'spoofer.html';
-    }
-}
-
 // ===== UPDATE CARD CREATION =====
 function createUpdateCard(update) {
     const mod = mods.find(m => m.id === update.modId);
     const timeDiff = getTimeDifference(update.date);
     
     return `
-        <div class="card-hover bg-black bg-opacity-50 rounded-lg p-4 border border-red-700 hover:border-red-500 transition-all duration-300">
+        <div class="card-hover bg-black bg-opacity-50 rounded-lg p-4 border border-red-700 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300">
             <div class="flex justify-between items-start mb-2">
                 <h3 class="font-semibold text-red-500">${mod?.title} 
-                    <span class="animate__animated animate__pulse animate__infinite">${update.version}</span>
+                    <span class="text-white">${update.version}</span>
                 </h3>
                 <span class="text-xs text-red-400">${timeDiff}</span>
             </div>
@@ -223,18 +204,33 @@ function createReviewCard(review) {
     const mod = mods.find(m => m.id === review.modId);
     
     return `
-        <div class="card-hover bg-black bg-opacity-50 rounded-lg p-4 border border-red-700 hover:border-red-500 transition-all duration-300">
+        <div class="card-hover bg-black bg-opacity-50 rounded-lg p-4 border border-red-700 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300">
             <div class="flex justify-between items-start mb-2">
                 <div class="flex items-center space-x-2">
                     <span class="font-semibold text-red-500 hover:text-red-400 transition-colors duration-300">${review.username}</span>
-                    <span class="text-xs text-red-400">on ${mod?.title}</span>
-                    <div class="flex text-red-500 text-sm animate__animated animate__pulse animate__infinite">${stars}</div>
+                    <div class="flex text-yellow-400 text-glow text-sm">${stars}</div>
                 </div>
                 <span class="text-xs text-red-400">${timeDiff}</span>
             </div>
             <p class="text-sm text-gray-300 hover:text-red-400 transition-colors duration-300 transform hover:translate-x-2">${review.comment}</p>
         </div>
     `;
+}
+
+// ===== VIEW MOD FUNCTION =====
+function viewMod(modId) {
+    const mod = mods.find(m => m.id === modId);
+    if (!mod) {
+        console.error(`Mod with ID ${modId} not found`);
+        return;
+    }
+    if (modId === 1) {
+        window.location.href = 'fortnite.html';
+    } else if (modId === 2) {
+        window.location.href = 'cod.html';
+    } else if (modId === 3) {
+        window.location.href = 'spoofer.html';
+    }
 }
 
 // ===== UTILITY FUNCTIONS =====
@@ -306,53 +302,42 @@ function renderReviews(sortBy = 'recent') {
     container.innerHTML = sortedReviews.map(review => createReviewCard(review)).join('');
 }
 
-// ===== DOWNLOAD FUNCTION =====
-function downloadMod(modId) {
-    const mod = mods.find(m => m.id === modId);
-    
-    if (!mod) {
-        console.error(`Mod with ID ${modId} not found`);
-        return;
-    }
-
-    if (!mod.downloadUrl) {
-        console.error(`No download URL found for mod ${mod.title}`);
-        alert('Download link not available for this mod.');
-        return;
-    }
-
-    try {
-        const link = document.createElement('a');
-        link.href = mod.downloadUrl;
-        link.download = `${mod.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.zip`;
-        
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        
-        link.click();
-        
-        document.body.removeChild(link);
-    } catch (error) {
-        console.error('Download error:', error);
-        alert(`Failed to initiate download for ${mod.title}`);
-    }
+// ===== RENDER FOOTER =====
+function renderFooter() {
+    const footerElement = document.getElementById('footer');
+    footerElement.innerHTML = `
+        <div class="flex justify-center gap-2 pt-2 border-t border-red-900/30">
+            <button class="bg-black/50 hover:bg-red-900/50 hover:shadow-lg hover:shadow-red-500/50 px-2 py-0.5 rounded-sm text-xs text-gray-200 transition-all duration-300 hover:text-white border border-red-900/30 hover:border-red-500/50">
+                Discord
+            </a>
+        </div>
+    `;
 }
+
 
 // ===== EVENT LISTENERS =====
 document.addEventListener('DOMContentLoaded', () => {
-    // Mod sort listener
-    document.getElementById('sortSelect').addEventListener('change', (e) => {
-        renderMods(e.target.value);
-    });
-
-    // Review sort listener
-    document.getElementById('reviewSort').addEventListener('change', (e) => {
-        renderReviews(e.target.value);
-    });
-
     // Initial renders
     renderMods();
     renderUpdates();
     renderReviews();
     updateStats();
+    renderFooter();
+
+    // Mod sort listener
+    const sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+            renderMods(e.target.value);
+        });
+    }
+
+    // Review sort listener
+    const reviewSort = document.getElementById('reviewSort');
+    if (reviewSort) {
+        reviewSort.addEventListener('change', (e) => {
+            renderReviews(e.target.value);
+        });
+    }
 });
+

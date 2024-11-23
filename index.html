@@ -7,6 +7,273 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
+
+/* Base Styles */
+body {
+    background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
+    min-height: 100vh;
+    color: white;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* God Rays Effect */
+.god-rays {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.ray {
+    position: absolute;
+    width: 100px;
+    height: 1000px;
+    background: linear-gradient(180deg, rgba(255,0,0,0.1) 0%, rgba(255,0,0,0) 100%);
+    transform-origin: top;
+    animation: rayAnimation 8s infinite linear;
+    filter: blur(4px);
+}
+
+.ray:nth-child(1) { left: 10%; animation-delay: 0s; }
+.ray:nth-child(2) { left: 30%; animation-delay: -2s; }
+.ray:nth-child(3) { left: 50%; animation-delay: -4s; }
+.ray:nth-child(4) { left: 70%; animation-delay: -6s; }
+.ray:nth-child(5) { left: 90%; animation-delay: -8s; }
+
+@keyframes rayAnimation {
+    0% {
+        transform: rotate(0deg) translateY(-100%);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.2;
+    }
+    80% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: rotate(45deg) translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* Glow Effects */
+.card-hover {
+    transition: all 0.3s ease;
+    position: relative;
+    backdrop-filter: blur(5px);
+    margin-bottom: 1.5rem;
+}
+
+.card-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0.5rem;
+    background: linear-gradient(45deg, #ff0000, #660000);
+    z-index: -1;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.card-hover:hover::before {
+    opacity: 0.3;
+    filter: blur(20px);
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+}
+
+/* Particle Effect */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(3px);
+    opacity: 0.7;
+}
+
+/* Content Positioning */
+.content-wrapper {
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    padding-top: 10rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+/* Pulse Animation */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Enhanced Card Styles */
+.stats-card {
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.stats-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+}
+
+/* Text Shadow Effect */
+.text-glow {
+    text-shadow: 0 0 10px rgba(250, 204, 21, 0.7),
+                 0 0 20px rgba(250, 204, 21, 0.3);
+}
+
+/* Scrollable Reviews Section */
+.reviews-section {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(102, 0, 0, 0.8));
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-top: 1rem;
+}
+
+.reviews-section::-webkit-scrollbar {
+    display: none;
+}
+
+.reviews-section .review-star {
+    color: #ffff00 !important;
+}
+
+/* Landing Page Styles */
+.landing-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.landing-page.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.landing-page .centered-image {
+    width: 400px;
+    height: 400px;
+    animation: zoomIn 0.5s ease;
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Logo Styles */
+.main-logo {
+    position: absolute;
+    top: 1rem;
+    left: 45%;
+    transform: translateX(-40%);
+    width: 200px;
+    height: 200px;
+    transition: filter 0.5s ease, opacity 1s ease;
+    filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9999;
+}
+
+.main-logo.unblurred {
+    filter: none !important;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Section Animations */
+.section-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    margin-bottom: 4rem;
+}
+
+.section-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Additional Spacing Utilities */
+.mod-grid {
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.update-list {
+    gap: 1.5rem;
+}
+
+.review-container {
+    gap: 1rem;
+}
+
+/* Button Styles */
+.glow-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+}
+
+/* Status Indicator */
+.status-indicator {
+    width: 0.625rem;
+    height: 0.625rem;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
         /* Base Styles */
         body {
             background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
@@ -139,7 +406,8 @@
 
         /* Text Shadow Effect */
         .text-glow {
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.7),
+                         0 0 20px rgba(250, 204, 21, 0.3);
         }
 
         /* Scrollable Reviews Section */
@@ -202,14 +470,14 @@
             }
         }
 
-/* Initially, the logo is hidden and blurred */
-.main-logo {
-    position: absolute;
-    top: 1rem;  /* Move logo up */
-    left: 46%;  /* Move logo slightly to the left */
-    transform: translateX(-40%);  /* Keep the logo centered */
-    width: 200px;
-    height: 200px;
+        /* Initially, the logo is hidden and blurred */
+        .main-logo {
+            position: absolute;
+            top: 1rem;  /* Move logo up */
+            left: 45%;  /* Move logo slightly to the left */
+            transform: translateX(-40%);  /* Keep the logo centered */
+            width: 200px;
+            height: 200
     transition: filter 0.5s ease, opacity 1s ease;
     filter: blur(10px);  /* Start with the logo blurred */
     opacity: 0;  /* Make the logo hidden initially */
@@ -243,6 +511,28 @@
             opacity: 1;
             transform: translateY(0);
         }
+/* Footer Button Styles */
+.footer-button {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,0,0,0.1), rgba(255,0,0,0.2));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.footer-button:hover::before {
+    opacity: 1;
+}
     </style>
 </head>
 <body>
@@ -302,21 +592,28 @@
             </div>
         </div>
 
-        <!-- Stats Section -->
-        <div class="grid grid-cols-3 gap-6 mt-12 animate__animated animate__fadeInUp animate__delay-1s">
-            <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
-                <h2 class="text-red-500 text-xl font-bold" id="totalDownloads">0K+</h2>
-                <p class="text-red-400">Total Downloads</p>
-            </div>
-            <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
-                <h2 class="text-red-500 text-xl font-bold" id="averageRating">0.0</h2>
-                <p class="text-red-400">Average Rating</p>
-            </div>
-            <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
-                <h2 class="text-red-500 text-xl font-bold" id="totalMods">0</h2>
-                <p class="text-red-400">Total Mods</p>
-            </div>
-        </div>
+<!-- Stats Section -->
+<div class="grid grid-cols-3 gap-6 mt-12 animate__animated animate__fadeInUp animate__delay-1s">
+    <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
+        <h2 class="text-yellow-400 text-glow text-xl font-bold" id="totalDownloads">0K+</h2>
+        <p class="text-red-400">Total Downloads</p>
+    </div>
+    <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
+        <h2 class="text-yellow-400 text-glow text-xl font-bold" id="averageRating">0.0</h2>
+        <p class="text-red-400">Average Rating</p>
+    </div>
+    <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
+        <h2 class="text-yellow-400 text-glow text-xl font-bold" id="totalMods">0</h2>
+        <p class="text-red-400">Total Mods</p>
+    </div>
+</div>
+
+<!-- Footer Button -->
+<div class="grid grid-cols-1 gap-6 mt-8 mb-12 animate__animated animate__fadeInUp animate__delay-1.5s">
+    <button onclick="window.location.href=' https://discord.gg/grbgfV5Dyp'" class="footer-button bg-black/50 hover:bg-red-900/50 px-4 py-2 rounded-sm text-sm text-gray-300 transition-all duration-300 hover:text-white border border-red-900/30 hover:border-red-500/50 flex items-center justify-center space-x-2">
+        <span>Discord</span>
+    </button>
+</div>
     </div>
 
     <!-- Scripts -->

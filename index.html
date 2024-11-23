@@ -3,29 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clarity Services - Redirecting</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <title>Clarity Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
+
+/* Base Styles */
+body {
+    background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
+    min-height: 100vh;
+    color: white;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* God Rays Effect */
+.god-rays {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.ray {
+    position: absolute;
+    width: 100px;
+    height: 1000px;
+    background: linear-gradient(180deg, rgba(255,0,0,0.1) 0%, rgba(255,0,0,0) 100%);
+    transform-origin: top;
+    animation: rayAnimation 8s infinite linear;
+    filter: blur(4px);
+}
+
+.ray:nth-child(1) { left: 10%; animation-delay: 0s; }
+.ray:nth-child(2) { left: 30%; animation-delay: -2s; }
+.ray:nth-child(3) { left: 50%; animation-delay: -4s; }
+.ray:nth-child(4) { left: 70%; animation-delay: -6s; }
+.ray:nth-child(5) { left: 90%; animation-delay: -8s; }
+
+@keyframes rayAnimation {
+    0% {
+        transform: rotate(0deg) translateY(-100%);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.2;
+    }
+    80% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: rotate(45deg) translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* Glow Effects */
+.card-hover {
+    transition: all 0.3s ease;
+    position: relative;
+    backdrop-filter: blur(5px);
+    margin-bottom: 1.5rem;
+}
+
+.card-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0.5rem;
+    background: linear-gradient(45deg, #ff0000, #660000);
+    z-index: -1;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.card-hover:hover::before {
+    opacity: 0.3;
+    filter: blur(20px);
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+}
+
+/* Particle Effect */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(3px);
+    opacity: 0.7;
+}
+
+/* Content Positioning */
+.content-wrapper {
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    padding-top: 10rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+/* Pulse Animation */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Enhanced Card Styles */
+.stats-card {
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.stats-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+}
+
+/* Text Shadow Effect */
+.text-glow {
+    text-shadow: 0 0 10px rgba(250, 204, 21, 0.7),
+                 0 0 20px rgba(250, 204, 21, 0.3);
+}
+
+/* Scrollable Reviews Section */
+.reviews-section {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(102, 0, 0, 0.8));
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-top: 1rem;
+}
+
+.reviews-section::-webkit-scrollbar {
+    display: none;
+}
+
+.reviews-section .review-star {
+    color: #ffff00 !important;
+}
+
+/* Landing Page Styles */
+.landing-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.landing-page.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.landing-page .centered-image {
+    width: 400px;
+    height: 400px;
+    animation: zoomIn 0.5s ease;
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Logo Styles */
+.main-logo {
+    position: absolute;
+    top: 1rem;
+    left: 45%;
+    transform: translateX(-40%);
+    width: 200px;
+    height: 200px;
+    transition: filter 0.5s ease, opacity 1s ease;
+    filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9999;
+}
+
+.main-logo.unblurred {
+    filter: none !important;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Section Animations */
+.section-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    margin-bottom: 4rem;
+}
+
+.section-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Additional Spacing Utilities */
+.mod-grid {
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.update-list {
+    gap: 1.5rem;
+}
+
+.review-container {
+    gap: 1rem;
+}
+
+/* Button Styles */
+.glow-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+}
+
+/* Status Indicator */
+.status-indicator {
+    width: 0.625rem;
+    height: 0.625rem;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+        /* Base Styles */
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: black;
-            color: white;
-        }
-        
-        .landing-page {
+            background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            color: white;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        .centered-image {
-            max-width: 300px;
-            margin: 20px auto;
-        }
-
+        /* God Rays Effect */
         .god-rays {
             position: fixed;
             top: 0;
@@ -34,98 +292,464 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            opacity: 0.5;
         }
 
         .ray {
             position: absolute;
-            width: 20px;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
-            animation: rayMove 8s infinite;
+            width: 100px;
+            height: 1000px;
+            background: linear-gradient(180deg, rgba(255,0,0,0.1) 0%, rgba(255,0,0,0) 100%);
+            transform-origin: top;
+            animation: rayAnimation 8s infinite linear;
+            filter: blur(4px);
         }
 
-        .ray:nth-child(1) { left: 20%; animation-delay: 0s; }
-        .ray:nth-child(2) { left: 40%; animation-delay: 2s; }
-        .ray:nth-child(3) { left: 60%; animation-delay: 4s; }
-        .ray:nth-child(4) { left: 80%; animation-delay: 6s; }
-        .ray:nth-child(5) { left: 90%; animation-delay: 8s; }
+        .ray:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .ray:nth-child(2) { left: 30%; animation-delay: -2s; }
+        .ray:nth-child(3) { left: 50%; animation-delay: -4s; }
+        .ray:nth-child(4) { left: 70%; animation-delay: -6s; }
+        .ray:nth-child(5) { left: 90%; animation-delay: -8s; }
 
-        @keyframes rayMove {
-            0% { transform: translateY(-100%) rotate(45deg); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(100%) rotate(45deg); opacity: 0; }
+        @keyframes rayAnimation {
+            0% {
+                transform: rotate(0deg) translateY(-100%);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.2;
+            }
+            80% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: rotate(45deg) translateY(100%);
+                opacity: 0;
+            }
         }
 
-        .stats-card {
+        /* Glow Effects */
+        .card-hover {
+            transition: all 0.3s ease;
+            position: relative;
             backdrop-filter: blur(5px);
         }
 
-        .text-glow {
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        .card-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 0.5rem;
+            background: linear-gradient(45deg, #ff0000, #660000);
+            z-index: -1;
+            transition: all 0.3s ease;
+            opacity: 0;
         }
 
-        #logo {
-            max-width: 200px;
-            z-index: 2;
+        .card-hover:hover::before {
+            opacity: 0.3;
+            filter: blur(20px);
         }
 
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        }
+
+        /* Particle Effect */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(3px);
+            opacity: 0.7;
+        }
+
+        /* Content Positioning */
         .content-wrapper {
             position: relative;
             z-index: 2;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding-top: 8rem;
+        }
+
+        /* Pulse Animation */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Enhanced Card Styles */
+        .stats-card {
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+        }
+
+        /* Text Shadow Effect */
+        .text-glow {
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.7),
+                         0 0 20px rgba(250, 204, 21, 0.3);
+        }
+
+        /* Scrollable Reviews Section */
+        .reviews-section {
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(102, 0, 0, 0.8));
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            max-height: 300px;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .reviews-section::-webkit-scrollbar {
+            display: none;
+        }
+
+        .reviews-section .review-star {
+            color: #ffff00 !important;
+        }
+
+        /* Landing Page Styles */
+        .landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .landing-page.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .landing-page .centered-image {
+            width: 400px;
+            height: 400px;
+            animation: zoomIn 0.5s ease;
+        }
+
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Initially, the logo is hidden and blurred */
+        .main-logo {
+            position: absolute;
+            top: 1rem;  /* Move logo up */
+            left: 45%;  /* Move logo slightly to the left */
+            transform: translateX(-40%);  /* Keep the logo centered */
+            width: 200px;
+            height: 200
+    transition: filter 0.5s ease, opacity 1s ease;
+    filter: blur(10px);  /* Start with the logo blurred */
+    opacity: 0;  /* Make the logo hidden initially */
+    visibility: hidden;  /* Ensure the logo is not visible */
+    z-index: 9999;  /* Make sure the logo is above all other elements */
+}
+
+/* When the landing page disappears, logo becomes unblurred and visible */
+.main-logo.unblurred {
+    filter: none !important;  /* Remove blur */
+    opacity: 1;  /* Make the logo visible */
+    visibility: visible;  /* Ensure the logo becomes visible */
+}
+
+
+
+
+
+        .main-logo.unblurred {
+            filter: none;
+            transform: translateX(-40%);
         }
 
         .section-reveal {
             opacity: 0;
             transform: translateY(20px);
-            animation: fadeInUp 1s forwards;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
+
+        .section-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+/* Footer Button Styles */
+.footer-button {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,0,0,0.1), rgba(255,0,0,0.2));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.footer-button:hover::before {
+    opacity: 1;
+}
     </style>
-    <script>
-        window.onload = function() {
-            // Set custom URL display
-            window.history.pushState({}, '', '/ClarityServices.shop.com');
-            
-            // Your target URL - change this to your actual destination
-            const targetUrl = "const targetUrl = "https://your-target-site.com";";
-            
-            // Redirect after showing animation (5 seconds)
-            setTimeout(function() {
-                window.location.href = targetUrl;
-            }, 5000);
-        };
-    </script>
 </head>
 <body>
-    <div id="landing-page" class="landing-page">
-        <div class="god-rays">
-            <div class="ray"></div>
-            <div class="ray"></div>
-            <div class="ray"></div>
-            <div class="ray"></div>
-            <div class="ray"></div>
+    <!-- Landing Page -->
+    <div class="landing-page" id="landing-page">
+        <img src="https://i.postimg.cc/RhRzN5c5/istockphoto-1308291476-612x612.png" alt="Clarity Services" class="centered-image">
+    </div>
+
+    <!-- God Rays -->
+    <div class="god-rays">
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+    </div>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Centered Image -->
+    <img src="https://i.postimg.cc/RhRzN5c5/istockphoto-1308291476-612x612.png" alt="Clarity Services" class="main-logo animate__animated animate__fadeInDown" id="logo">
+
+    <!-- Main Content -->
+    <div class="content-wrapper container mx-auto px-4">
+        <!-- Mods Section -->
+        <div class="mb-12 section-reveal">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-500">Mods</h2>
+                <select id="sortSelect" class="bg-black bg-opacity-70 text-red-400 border border-red-700 rounded px-2 py-1 animate__animated animate__fadeInRight animate__delay-1s">
+                    <option value="popular">Most Popular</option>
+                    <option value="latest">Latest</option>
+                    <option value="rating">Highest Rated</option>
+                </select>
+            </div>
+            <div id="modsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 section-reveal animate__animated animate__fadeInUp animate__delay-1.5s"></div>
         </div>
 
-        <img src="https://i.postimg.cc/RhRzN5c5/istockphoto-1308291476-612x612.png" 
-             id="logo" 
-             class="main-logo animate__animated animate__fadeInDown"
-             alt="Clarity Services">
+        <!-- Updates Section -->
+        <div class="mb-12 section-reveal">
+            <h2 class="text-2xl font-bold text-red-500 mb-4">Latest Updates</h2>
+            <div id="updatesContainer" class="space-y-6 section-reveal"></div>
+        </div>
 
-        <div class="content-wrapper container mx-auto px-4">
-            <div class="grid grid-cols-3 gap-6 mt-12 animate__animated animate__fadeInUp animate__delay-1s">
-                <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
-                    <h2 id="totalDownloads" class="text-yellow-400 text-glow text-xl font-bold">0K+</h2>
-                    <div>Total Downloads</div>
-                </div>
-                <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
-                    <h2 id="averageRating" class="text-yellow-400 text-glow text-xl font-bold">0.0</h2>
-                    <div>Average Rating</div>
-                </div>
-                <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
-                    <h2 id="totalMods" class="text-yellow-400 text-glow text-xl font-bold">0</h2>
-                    <div>Total Mods</div>
-                </div>
+        <!-- Reviews Section -->
+        <div class="mb-12 section-reveal">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-red-500">Reviews</h2>
+                <select id="reviewSort" class="bg-black bg-opacity-70 text-red-400 border border-red-700 rounded px-2 py-1 animate__animated animate__fadeInRight animate__delay-1s">
+                    <option value="recent">Most Recent</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="oldest">Oldest First</option>
+                </select>
+            </div>
+            <div class="reviews-section section-reveal animate__animated animate__fadeInUp animate__delay-1.5s" id="reviewsSection">
+                <div id="reviewsContainer" class="space-y-4"></div>
             </div>
         </div>
+
+<!-- Stats Section -->
+<div class="grid grid-cols-3 gap-6 mt-12 animate__animated animate__fadeInUp animate__delay-1s">
+    <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
+        <h2 class="text-yellow-400 text-glow text-xl font-bold" id="totalDownloads">0K+</h2>
+        <p class="text-red-400">Total Downloads</p>
     </div>
+    <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
+        <h2 class="text-yellow-400 text-glow text-xl font-bold" id="averageRating">0.0</h2>
+        <p class="text-red-400">Average Rating</p>
+    </div>
+    <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
+        <h2 class="text-yellow-400 text-glow text-xl font-bold" id="totalMods">0</h2>
+        <p class="text-red-400">Total Mods</p>
+    </div>
+</div>
+
+<!-- Footer Button -->
+<div class="grid grid-cols-1 gap-6 mt-8 mb-12 animate__animated animate__fadeInUp animate__delay-1.5s">
+    <button onclick="window.location.href=' https://discord.gg/grbgfV5Dyp'" class="footer-button bg-black/50 hover:bg-red-900/50 px-4 py-2 rounded-sm text-sm text-gray-300 transition-all duration-300 hover:text-white border border-red-900/30 hover:border-red-500/50 flex items-center justify-center space-x-2">
+        <span>Discord</span>
+    </button>
+</div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Load sound effects
+        const hoverSound = new Audio('hover-sound.mp3');
+        const clickSound = new Audio('click-sound.mp3');
+        const welcomeSound = new Audio('welcome-sound.mp3');
+
+        // Play welcome sound on page load
+      window.addEventListener('load', () => {
+    // Play welcome sound on page load
+    welcomeSound.play();
+    
+    // Delay to hide the landing page and reveal the logo
+    setTimeout(() => {
+        // Hide the landing page after 1 second
+        document.getElementById('landing-page').classList.add('hidden');
+        
+        // Unblur the logo and make it visible
+        const logo = document.getElementById('logo');
+        logo.classList.add('unblurred');
+        
+        // Show the rest of the content
+        document.querySelector('.content-wrapper').style.opacity = '1';
+        
+        // Reveal each section with animations
+        document.querySelectorAll('.section-reveal').forEach(section => {
+            section.classList.add('visible');
+        });
+    }, 1000);  // Delay for 1 second before triggering the changes
+});
+
+
+
+        // Play hover sound on card hover
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                hoverSound.play();
+            });
+        });
+
+        // Play click sound on button click
+        document.querySelectorAll('button, a').forEach(element => {
+            element.addEventListener('click', () => {
+                clickSound.play();
+            });
+        });
+
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 40,
+                    "density": {
+                        "enable": true,
+                        "value_area": 1000
+                    }
+                },
+                "color": {
+                    "value": "#ff0000"
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 4,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 200,
+                    "color": "#ff0000",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "bubble"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "bubble": {
+                        "distance": 200,
+                        "size": 6,
+                        "duration": 2,
+                        "opacity": 0.2,
+                        "speed": 3
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Smooth scroll to reviews section
+        document.querySelector('#reviewsSection').addEventListener('click', () => {
+            document.querySelector('.reviews-section').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>

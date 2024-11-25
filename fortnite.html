@@ -1,9 +1,12 @@
+Here's the complete code for the updated Fortnite page with the requested additions:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fortnite Menu - Clarity Services™</title>
+    <title>Clarity's Fortnite Menu - Clarity Services™</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
@@ -13,68 +16,6 @@
             color: white;
             position: relative;
             overflow-x: hidden;
-        }
-
-        .hover-animate {
-            transition: transform 0.3s ease, text-shadow 0.3s ease;
-        }
-
-        .hover-animate:hover {
-            transform: translateY(-2px);
-            text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
-        }
-
-/* Remove the arrow completely */
-.feature-item::before {
-    content: ''; /* No content to generate the arrow */
-    position: absolute;
-    left: -1rem;
-    opacity: 0; /* Make sure it’s invisible */
-    transition: none; /* No transition */
-}
-
-/* Remove hover effects in the feature item */
-.feature-item {
-    position: relative;
-    padding-left: 1rem; /* Keep padding but no arrow */
-}
-
-/* Disable hover text animation */
-.feature-item:hover {
-    transform: none;
-    color: inherit;
-    text-shadow: none;
-}
-
-/* Remove the hover effect for text shadows */
-.hover-animate {
-    transition: none;
-}
-
-.hover-animate:hover {
-    transform: none;
-    text-shadow: none;
-}
-
-/* Slideshow related styling should not be affected */
-.slideshow-container,
-.slides-wrapper,
-.slide {
-    position: relative;
-    /* Ensure slideshow remains unaffected */
-}
-
-
-
-        /* Remove the arrows next to the text */
-.feature-item::before {
-    content: none; /* This will remove the arrow icon from the list items */
-}
-
-
-        .feature-item:hover::before {
-            opacity: 1;
-            transform: translateX(1rem);
         }
 
         .fog-container {
@@ -180,13 +121,43 @@
         .slide-arrow.prev { left: 15px; }
         .slide-arrow.next { right: 15px; }
 
-        .animate-pulse-slow {
-            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        .arrow-icon {
+            width: 20px;
+            height: 20px;
+            position: relative;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .7; }
+        .arrow-icon::before,
+        .arrow-icon::after {
+            content: '';
+            position: absolute;
+            background: white;
+            height: 2px;
+            width: 12px;
+        }
+
+        .prev .arrow-icon::before {
+            transform: rotate(-45deg);
+            top: 25%;
+            left: 25%;
+        }
+
+        .prev .arrow-icon::after {
+            transform: rotate(45deg);
+            top: 65%;
+            left: 25%;
+        }
+
+        .next .arrow-icon::before {
+            transform: rotate(45deg);
+            top: 25%;
+            right: 25%;
+        }
+
+        .next .arrow-icon::after {
+            transform: rotate(-45deg);
+            top: 65%;
+            right: 25%;
         }
 
         .glow-button {
@@ -197,6 +168,15 @@
             0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
             50% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); }
             100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
         }
     </style>
 </head>
@@ -241,9 +221,72 @@
                     
                     <!-- Image Description -->
                     <div class="bg-black bg-opacity-50 p-4 rounded-lg border border-red-700">
-                        <p class="text-gray-300 hover-animate" id="slideDescription">
+                        <p class="text-gray-300" id="slideDescription">
                             Unleash the full power of Fortnite with our advanced menu, packed with customizable aimbot, ESP, and combat settings designed to give you the ultimate edge. Our aimbot is fully adjustable, allowing you to fine-tune smoothness, FOV, and target selection for the most precise shots every time.
                         </p>
+                        
+                        <div class="h-8"></div>  <!-- Simple spacer -->
+                        
+                        <!-- Status Tiles -->
+                        <div class="grid grid-cols-3 gap-3 mb-6 animate-fade-in">
+                            <!-- Anti-Cheat Status -->
+                            <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 animate__animated animate__fadeInLeft animate__delay-1s">
+                                <div class="flex items-center gap-2">
+                                    <div class="flex items-center">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
+                                        <h4 class="text-sm font-medium text-red-400">Anti-Cheat Status</h4>
+                                    </div>
+                                    <span class="text-xs text-white/50 ml-auto">Undetected</span>
+                                </div>
+                            </div>
+                        
+                            <!-- HWID Spoofer -->
+                            <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 animate__animated animate__fadeInLeft animate__delay-1.5s">
+                                <div class="flex items-center gap-2">
+                                    <div class="text-xl">🛡️</div>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-red-400">HWID Spoofer</h4>
+                                        <p class="text-xs text-white/50">100% Protected</p>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!-- Chapter Updates -->
+                            <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 animate__animated animate__fadeInLeft animate__delay-2s">
+                                <div class="flex items-center gap-2">
+                                    <div class="text-xl">🔄</div>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-red-400">Chapter Updates</h4>
+                                        <p class="text-xs text-white/50">Always Current</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Premium Features Section -->
+                        <div class="space-y-4 animate__animated animate__fadeInUp animate__delay-1.5s">
+                            <div>
+                                <h2 class="text-xl font-semibold text-red-500 text-glow mb-2">Premium Features</h2>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                                        <h3 class="text-red-400 font-medium mb-1">Silent Aim System</h3>
+                                        <p class="text-sm text-white/70">Advanced targeting with customizable smoothness, FOV, and bullet prediction for perfect accuracy.</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                                        <h3 class="text-red-400 font-medium mb-1">Enhanced Player ESP</h3>
+                                        <p class="text-sm text-white/70">Complete visibility of enemies, items, chests, and supply drops through walls with distance indicators.</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                                        <h3 class="text-red-400 font-medium mb-1">Movement Enhancement</h3>
+                                        <p class="text-sm text-white/70">Custom speed modifier, instant build mode, and automatic resource gathering capabilities.</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                                        <h3 class="text-red-400 font-medium mb-1">Exclusive Options</h3>
+                                        <p class="text-sm text-white/70">Auto-heal, instant revive, storm warning system, and rare item alerts.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -251,7 +294,7 @@
                 <div class="space-y-6">
                     <div>
                         <h1 class="text-3xl font-bold text-red-500 text-glow mb-2 animate__animated animate__fadeInDown hover-animate">Clarity's Fortnite Menu</h1>
-                        <p class="text-red-400 animate__animated animate__fadeInDown animate__delay-0.5s hover-animate">By ClarityServices™</p>
+                        <p class="text-red-400">By ClarityServices™</p>
                     </div>
 
                     <div class="flex items-center space-x-4 animate__animated animate__fadeInUp animate__delay-1s">
@@ -267,31 +310,31 @@
                     <div class="space-y-4 animate__animated animate__fadeInUp animate__delay-1.5s">
                         <div>
                             <h2 class="text-xl font-semibold text-red-500 text-glow mb-2 hover-animate">Description</h2>
-                            <p class="text-gray-300 text-lg hover-animate">
+                            <p class="text-gray-300 text-lg">
                                 A silent Fortnite launcher with the latest and most up-to-date detection settings, ensuring 100% undetectability.
                             </p>
                         </div>
                         
                         <div>
-                            <h3 class="text-lg font-semibold text-red-500 text-glow mb-2 hover-animate">Key Features</h3>
+<h3 class="text-lg font-semibold text-red-500 text-glow mb-2 hover-animate">Key Features</h3>
                             <ul class="text-gray-300 space-y-2 list-disc pl-5">
-                                <li class="feature-item">Undetected Aimbot with customizable smoothness and FOV</li>
-                                <li class="feature-item">Full ESP features including player boxes</li>
-                                <li class="feature-item">Speed hack with adjustable multiplier</li>
-                                <li class="feature-item">Infinite stamina or unlimited sprint</li>
-                                <li class="feature-item">Auto-loot for nearby items</li>
-                                <li class="feature-item">Built-in HWID spoofer for maximum security</li>
-                                <li class="feature-item">Rapid fire and no recoil options</li>
+                                <li>Undetected Aimbot with customizable smoothness and FOV</li>
+                                <li>Full ESP features including player boxes</li>
+                                <li>Speed hack with adjustable multiplier</li>
+                                <li>Infinite stamina or unlimited sprint</li>
+                                <li>Auto-loot for nearby items</li>
+                                <li>Built-in HWID spoofer for maximum security</li>
+                                <li>Rapid fire and no recoil options</li>
                             </ul>
                         </div>
 
                         <div>
                             <h3 class="text-lg font-semibold text-red-500 text-glow mb-2 hover-animate">System Requirements</h3>
                             <ul class="text-gray-300 space-y-2 list-disc pl-5">
-                                <li class="feature-item">Windows 10/11 (64-bit)</li>
-                                <li class="feature-item">Latest GPU drivers</li>
-                                <li class="feature-item">Administrator access</li>
-                                <li class="feature-item">Anti-virus disabled during installation</li>
+                                <li>Windows 10/11 (64-bit)</li>
+                                <li>Latest GPU drivers</li>
+                                <li>Administrator access</li>
+                                <li>Anti-virus disabled during installation</li>
                             </ul>
                         </div>
                     </div>
@@ -299,9 +342,11 @@
                     <!-- Buttons -->
                     <div class="flex space-x-4 animate__animated animate__fadeInUp animate__delay-2s">
                         <a href="https://bit.ly/4fEVIsA"
+                           download="ClrtyFortnite.zip"
                            class="glow-button bg-red-800 hover:bg-red-900 px-8 py-3 rounded-lg text-white font-semibold transition-all duration-300 transform hover:-translate-y-1">
                             Download Now
                         </a>
+
                         <button onclick="showInstallGuide()"
                                 class="glow-button bg-red-800 hover:bg-red-900 px-8 py-3 rounded-lg text-white font-semibold transition-all duration-300 transform hover:-translate-y-1">
                             Installation Guide
@@ -316,16 +361,19 @@
         let slideIndex = 0;
         const slidesWrapper = document.getElementById('slidesWrapper');
         const descriptions = [
-            "Unleash the full power of Fortnite with our advanced menu, packed with customizable aimbot, ESP, and combat settings designed to give you the ultimate edge.",
-            "Our ESP system provides crystal-clear visibility of enemy locations, loot, and critical game elements—so you're always one step ahead.",
-            "With real-time updates and full customization options, this menu turns Fortnite into a game of strategy and skill."
+            "Unleash the full power of Fortnite with our advanced menu, packed with customizable aimbot, ESP, and combat settings designed to give you the ultimate edge. Our aimbot is fully adjustable, allowing you to fine-tune smoothness, FOV, and target selection for the most precise shots every time.",
+            "Experience unparalleled stealth and efficiency with our silent aim system. With customizable smoothness, FOV, and bullet prediction, you'll dominate the battlefield with perfect accuracy. Our enhanced player ESP provides complete visibility of enemies, items, chests, and supply drops, giving you a strategic advantage in every encounter.",
+            "Take your gameplay to the next level with our exclusive movement enhancements. Customize your speed, activate instant build mode, and automatically gather resources to outmaneuver your opponents. Our premium features, including auto-heal, instant revive, storm warnings, and rare item alerts, ensure you're always one step ahead."
         ];
 
         function changeSlide(direction) {
             const slides = document.getElementsByClassName('slide');
             slideIndex = (slideIndex + direction + slides.length) % slides.length;
             
+            // Smooth slide transition
             slidesWrapper.style.transform = `translateX(-${slideIndex * 100}%)`;
+            
+            // Update description
             document.getElementById("slideDescription").textContent = descriptions[slideIndex];
         }
 

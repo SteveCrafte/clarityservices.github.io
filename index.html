@@ -1,280 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clarity Services</title>
+    <title>Call of Duty: BO6/Warzone Menu - Clarity Services™</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
-
-/* Base Styles */
-body {
-    background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
-    min-height: 100vh;
-    color: white;
-    position: relative;
-    overflow-x: hidden;
-}
-
-/* God Rays Effect */
-.god-rays {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.5;
-}
-
-.ray {
-    position: absolute;
-    width: 100px;
-    height: 1000px;
-    background: linear-gradient(180deg, rgba(255,0,0,0.1) 0%, rgba(255,0,0,0) 100%);
-    transform-origin: top;
-    animation: rayAnimation 8s infinite linear;
-    filter: blur(4px);
-}
-
-.ray:nth-child(1) { left: 10%; animation-delay: 0s; }
-.ray:nth-child(2) { left: 30%; animation-delay: -2s; }
-.ray:nth-child(3) { left: 50%; animation-delay: -4s; }
-.ray:nth-child(4) { left: 70%; animation-delay: -6s; }
-.ray:nth-child(5) { left: 90%; animation-delay: -8s; }
-
-@keyframes rayAnimation {
-    0% {
-        transform: rotate(0deg) translateY(-100%);
-        opacity: 0;
-    }
-    20% {
-        opacity: 0.2;
-    }
-    80% {
-        opacity: 0.2;
-    }
-    100% {
-        transform: rotate(45deg) translateY(100%);
-        opacity: 0;
-    }
-}
-
-/* Glow Effects */
-.card-hover {
-    transition: all 0.3s ease;
-    position: relative;
-    backdrop-filter: blur(5px);
-    margin-bottom: 1.5rem;
-}
-
-.card-hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 0.5rem;
-    background: linear-gradient(45deg, #ff0000, #660000);
-    z-index: -1;
-    transition: all 0.3s ease;
-    opacity: 0;
-}
-
-.card-hover:hover::before {
-    opacity: 0.3;
-    filter: blur(20px);
-}
-
-.card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-}
-
-/* Particle Effect */
-#particles-js {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    filter: blur(3px);
-    opacity: 0.7;
-}
-
-/* Content Positioning */
-.content-wrapper {
-    position: relative;
-    z-index: 2;
-    backdrop-filter: blur(5px);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    padding-top: 10rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
-}
-
-/* Pulse Animation */
-.pulse {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
-}
-
-/* Enhanced Card Styles */
-.stats-card {
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.stats-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
-}
-
-/* Text Shadow Effect */
-.text-glow {
-    text-shadow: 0 0 10px rgba(250, 204, 21, 0.7),
-                 0 0 20px rgba(250, 204, 21, 0.3);
-}
-
-/* Scrollable Reviews Section */
-.reviews-section {
-    position: relative;
-    z-index: 2;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(102, 0, 0, 0.8));
-    padding: 1.5rem;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-    max-height: 400px;
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    margin-top: 1rem;
-}
-
-.reviews-section::-webkit-scrollbar {
-    display: none;
-}
-
-.reviews-section .review-star {
-    color: #ffff00 !important;
-}
-
-/* Landing Page Styles */
-.landing-page {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
-    z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-}
-
-.landing-page.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.landing-page .centered-image {
-    width: 400px;
-    height: 400px;
-    animation: zoomIn 0.5s ease;
-}
-
-@keyframes zoomIn {
-    0% {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* Logo Styles */
-.main-logo {
-    position: absolute;
-    top: 1rem;
-    left: 45%;
-    transform: translateX(-40%);
-    width: 200px;
-    height: 200px;
-    transition: filter 0.5s ease, opacity 1s ease;
-    filter: blur(10px);
-    opacity: 0;
-    visibility: hidden;
-    z-index: 9999;
-}
-
-.main-logo.unblurred {
-    filter: none !important;
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Section Animations */
-.section-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    margin-bottom: 4rem;
-}
-
-.section-reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Additional Spacing Utilities */
-.mod-grid {
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
-.update-list {
-    gap: 1.5rem;
-}
-
-.review-container {
-    gap: 1rem;
-}
-
-/* Button Styles */
-.glow-button {
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    letter-spacing: 0.025em;
-}
-
-/* Status Indicator */
-.status-indicator {
-    width: 0.625rem;
-    height: 0.625rem;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
-}
-        /* Base Styles */
         body {
             background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
             min-height: 100vh;
@@ -283,7 +16,30 @@ body {
             overflow-x: hidden;
         }
 
-        /* God Rays Effect */
+        .fog-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(0deg, rgba(255,0,0,0.15) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 10;
+            filter: blur(20px);
+            box-shadow: 0 -10px 50px rgba(255,0,0,0.2);
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 10px currentColor;
+            animation: smoothGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes smoothGlow {
+            0% { text-shadow: 0 0 5px currentColor; }
+            50% { text-shadow: 0 0 15px currentColor, 0 0 20px red; }
+            100% { text-shadow: 0 0 5px currentColor; }
+        }
+        
         .god-rays {
             position: fixed;
             top: 0;
@@ -291,257 +47,138 @@ body {
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
-            opacity: 0.5;
+            z-index: -1;
         }
-
+        
         .ray {
             position: absolute;
-            width: 100px;
-            height: 1000px;
-            background: linear-gradient(180deg, rgba(255,0,0,0.1) 0%, rgba(255,0,0,0) 100%);
-            transform-origin: top;
-            animation: rayAnimation 8s infinite linear;
-            filter: blur(4px);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 0, 0, 0.2), transparent);
+            animation: ray-animation 8s infinite;
+        }
+        
+        .ray:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .ray:nth-child(2) { left: 40%; animation-delay: 2s; }
+        .ray:nth-child(3) { left: 60%; animation-delay: 4s; }
+        .ray:nth-child(4) { left: 80%; animation-delay: 6s; }
+        .ray:nth-child(5) { left: 90%; animation-delay: 8s; }
+        
+        @keyframes ray-animation {
+            0% { transform: translateY(-100%); opacity: 0; }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.3; }
+            100% { transform: translateY(100%); opacity: 0; }
         }
 
-        .ray:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .ray:nth-child(2) { left: 30%; animation-delay: -2s; }
-        .ray:nth-child(3) { left: 50%; animation-delay: -4s; }
-        .ray:nth-child(4) { left: 70%; animation-delay: -6s; }
-        .ray:nth-child(5) { left: 90%; animation-delay: -8s; }
-
-        @keyframes rayAnimation {
-            0% {
-                transform: rotate(0deg) translateY(-100%);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.2;
-            }
-            80% {
-                opacity: 0.2;
-            }
-            100% {
-                transform: rotate(45deg) translateY(100%);
-                opacity: 0;
-            }
-        }
-
-        /* Glow Effects */
-        .card-hover {
-            transition: all 0.3s ease;
+        /* Slideshow Styles */
+        .slideshow-container {
             position: relative;
-            backdrop-filter: blur(5px);
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
         }
 
-        .card-hover::before {
+        .slides-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            display: block;
+            opacity: 1;
+        }
+
+        .slide-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            border-radius: 50%;
+        }
+
+        .slide-arrow:hover {
+            background: rgba(255, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+
+        .slide-arrow.prev { left: 15px; }
+        .slide-arrow.next { right: 15px; }
+
+        .arrow-icon {
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+
+        .arrow-icon::before,
+        .arrow-icon::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 0.5rem;
-            background: linear-gradient(45deg, #ff0000, #660000);
-            z-index: -1;
-            transition: all 0.3s ease;
-            opacity: 0;
+            background: white;
+            height: 2px;
+            width: 12px;
         }
 
-        .card-hover:hover::before {
-            opacity: 0.3;
-            filter: blur(20px);
+        .prev .arrow-icon::before {
+            transform: rotate(-45deg);
+            top: 25%;
+            left: 25%;
         }
 
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        .prev .arrow-icon::after {
+            transform: rotate(45deg);
+            top: 65%;
+            left: 25%;
         }
 
-        /* Particle Effect */
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            filter: blur(3px);
-            opacity: 0.7;
+        .next .arrow-icon::before {
+            transform: rotate(45deg);
+            top: 25%;
+            right: 25%;
         }
 
-        /* Content Positioning */
-        .content-wrapper {
-            position: relative;
-            z-index: 2;
-            backdrop-filter: blur(5px);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            padding-top: 8rem;
+        .next .arrow-icon::after {
+            transform: rotate(-45deg);
+            top: 65%;
+            right: 25%;
         }
 
-        /* Pulse Animation */
-        .pulse {
-            animation: pulse 2s infinite;
+        .glow-button {
+            animation: smoothButtonGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes smoothButtonGlow {
+            0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); }
+            100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
         }
-
-        /* Enhanced Card Styles */
-        .stats-card {
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .stats-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
-        }
-
-        /* Text Shadow Effect */
-        .text-glow {
-            text-shadow: 0 0 10px rgba(250, 204, 21, 0.7),
-                         0 0 20px rgba(250, 204, 21, 0.3);
-        }
-
-        /* Scrollable Reviews Section */
-        .reviews-section {
-            position: relative;
-            z-index: 2;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(102, 0, 0, 0.8));
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-            max-height: 300px;
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .reviews-section::-webkit-scrollbar {
-            display: none;
-        }
-
-        .reviews-section .review-star {
-            color: #ffff00 !important;
-        }
-
-        /* Landing Page Styles */
-        .landing-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
-            z-index: 999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .landing-page.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .landing-page .centered-image {
-            width: 400px;
-            height: 400px;
-            animation: zoomIn 0.5s ease;
-        }
-
-        @keyframes zoomIn {
-            0% {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        /* Initially, the logo is hidden and blurred */
-        .main-logo {
-            position: absolute;
-            top: 1rem;  /* Move logo up */
-            left: 45%;  /* Move logo slightly to the left */
-            transform: translateX(-40%);  /* Keep the logo centered */
-            width: 200px;
-            height: 200
-    transition: filter 0.5s ease, opacity 1s ease;
-    filter: blur(10px);  /* Start with the logo blurred */
-    opacity: 0;  /* Make the logo hidden initially */
-    visibility: hidden;  /* Ensure the logo is not visible */
-    z-index: 9999;  /* Make sure the logo is above all other elements */
-}
-
-/* When the landing page disappears, logo becomes unblurred and visible */
-.main-logo.unblurred {
-    filter: none !important;  /* Remove blur */
-    opacity: 1;  /* Make the logo visible */
-    visibility: visible;  /* Ensure the logo becomes visible */
-}
-
-
-
-
-
-        .main-logo.unblurred {
-            filter: none;
-            transform: translateX(-40%);
-        }
-
-        .section-reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .section-reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-/* Footer Button Styles */
-.footer-button {
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.footer-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(255,0,0,0.1), rgba(255,0,0,0.2));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.footer-button:hover::before {
-    opacity: 1;
-}
     </style>
 </head>
 <body>
-    <!-- Landing Page -->
-    <div class="landing-page" id="landing-page">
-        <img src="https://i.postimg.cc/RhRzN5c5/istockphoto-1308291476-612x612.png" alt="Clarity Services" class="centered-image">
-    </div>
-
-    <!-- God Rays -->
     <div class="god-rays">
         <div class="ray"></div>
         <div class="ray"></div>
@@ -550,391 +187,250 @@ body {
         <div class="ray"></div>
     </div>
 
-    <!-- Particles Background -->
-    <div id="particles-js"></div>
+    <div class="fog-container"></div>
 
-    <!-- Centered Image -->
-    <img src="https://i.postimg.cc/RhRzN5c5/istockphoto-1308291476-612x612.png" alt="Clarity Services" class="main-logo animate__animated animate__fadeInDown" id="logo">
-
-    <!-- Main Content -->
-    <div class="content-wrapper container mx-auto px-4">
-
-<!-- Info Tiles -->
-<div class="grid grid-cols-3 gap-3 mb-3 animate-fade-in">
-    <!-- Support Tile -->
-    <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 hover:translate-y-[-2px]">
-        <div class="flex items-center gap-2">
-            <div class="text-xl">📞</div>
-            <div>
-                <h4 class="text-sm font-medium text-red-400">24/7 Support</h4>
-                <p class="text-xs text-white/50">Avg Response: 15 min + </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Live Chat Tile -->
-    <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 hover:translate-y-[-2px]">
-        <div class="flex items-center gap-2">
-            <div class="text-xl">💬</div>
-            <div>
-                <h4 class="text-sm font-medium text-red-400">Live Chat</h4>
-                <p class="text-xs text-white/50">Online Now</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Active Users Tile -->
-    <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 hover:translate-y-[-2px]">
-        <div class="flex items-center gap-2">
-            <div class="text-xl">👥</div>
-            <div>
-                <h4 class="text-sm font-medium text-red-400">Active Users</h4>
-                <p class="text-xs text-white/50">322 Online</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-        <!-- Mods Section -->
-        <div class="mb-12 section-reveal">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-red-500">Mods</h2>
-                <select id="sortSelect" class="bg-black bg-opacity-70 text-red-400 border border-red-700 rounded px-2 py-1 animate__animated animate__fadeInRight animate__delay-1s">
-                    <option value="popular">Most Popular</option>
-                    <option value="latest">Latest</option>
-                    <option value="rating">Highest Rated</option>
-                </select>
-            </div>
-            <div id="modsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 section-reveal animate__animated animate__fadeInUp animate__delay-1.5s"></div>
-        </div>
-
-        <!-- Updates Section -->
-        <div class="mb-12 section-reveal">
-            <h2 class="text-2xl font-bold text-red-500 mb-4">Latest Updates</h2>
-            <div id="updatesContainer" class="space-y-6 section-reveal"></div>
-        </div>
-
-        <!-- Reviews Section -->
-        <div class="mb-12 section-reveal">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-red-500">Reviews</h2>
-                <select id="reviewSort" class="bg-black bg-opacity-70 text-red-400 border border-red-700 rounded px-2 py-1 animate__animated animate__fadeInRight animate__delay-1s">
-                    <option value="recent">Most Recent</option>
-                    <option value="rating">Highest Rated</option>
-                    <option value="oldest">Oldest First</option>
-                </select>
-            </div>
-            <div class="reviews-section section-reveal animate__animated animate__fadeInUp animate__delay-1.5s" id="reviewsSection">
-                <div id="reviewsContainer" class="space-y-4"></div>
-            </div>
-        </div>
-
-
-
-<!-- Trust Stats Container -->
-<div class="flex flex-col gap-2.5 mb-6 animate-fade-in">
-    <!-- Verified Provider Tile -->
-    <div class="max-w-7xl mx-auto px-4 rounded-lg py-3 border border-blue-500/20 w-full backdrop-blur-sm hover:border-blue-500/30 transition-all duration-200 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(59,130,246,0.1)] animate-slide-in-left" style="animation-delay: 0.1s">
-        <div class="flex flex-col md:flex-row items-center justify-between">
-            <div class="flex items-center flex-1">
-                <div class="bg-blue-500/5 p-2 rounded-lg mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                    </svg>
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-base font-semibold text-blue-400 hover:text-blue-300 transition-colors">Verified Software Provider</h3>
-                    <p class="text-xs text-white/70">All software is tested and verified for safety</p>
-                </div>
-            </div>
-            <div class="flex md:gap-6 gap-3 items-center mt-2 md:mt-0">
-                <div class="text-center px-3">
-                    <p class="text-green-400 font-semibold text-sm">4.9/5.0</p>
-                    <p class="text-xs text-white/50">Trust Score</p>
-                </div>
-                <div class="text-center px-3 border-l border-r border-blue-500/20">
-                    <p class="text-green-400 font-semibold text-sm">24/7</p>
-                    <p class="text-xs text-white/50">Support</p>
-                </div>
-                <div class="text-center px-3">
-                    <p class="text-green-400 font-semibold text-sm">2+ Years</p>
-                    <p class="text-xs text-white/50">Active</p>
-                </div>
-            </div>
-        </div>
-        <!-- Status Badges -->
-        <div class="flex gap-2 mt-2 flex-wrap">
-            <div class="bg-green-500/10 rounded px-2 py-0.5 text-xs text-green-400 flex items-center">
-                <span class="w-1 h-1 bg-green-400 rounded-full mr-1.5"></span>
-                Verified Seller
-            </div>
-            <div class="bg-blue-500/10 rounded px-2 py-0.5 text-xs text-blue-400 flex items-center">
-                <span class="w-1 h-1 bg-blue-400 rounded-full mr-1.5"></span>
-                Premium Member
-            </div>
-            <div class="bg-purple-500/10 rounded px-2 py-0.5 text-xs text-purple-400 flex items-center">
-                <span class="w-1 h-1 bg-purple-400 rounded-full mr-1.5"></span>
-                Fast Response
-            </div>
-        </div>
-    </div>
-
-    <!-- Security Scan Tile -->
-    <div class="max-w-7xl mx-auto px-4 rounded-lg py-3 border border-blue-500/20 w-full backdrop-blur-sm hover:border-blue-500/30 transition-all duration-200 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(59,130,246,0.1)] animate-slide-in-left" style="animation-delay: 0.2s">
-        <div class="flex flex-col md:flex-row items-center justify-between">
-            <div class="flex items-center">
-                <div class="bg-blue-500/5 p-2 rounded-lg mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-base font-semibold text-blue-400 hover:text-blue-300 transition-colors">Security Scan Status</h3>
-                    <p class="text-xs text-white/70">Real-time protection and scanning</p>
-                </div>
-            </div>
-            <div class="w-full md:w-1/4 mt-2 md:mt-0 animate-fade-in" style="animation-delay: 0.3s">
-                <div class="bg-black/30 rounded-full h-1.5 overflow-hidden">
-                    <div class="bg-gradient-to-r from-blue-600 to-blue-400 h-full rounded-full transition-all duration-700 animate-progress-fill" style="width: 88%">
-                        <div class="animate-shine absolute inset-0 w-full h-full"></div>
+    <div class="container mx-auto px-4 py-8">
+        <a href="index.html" class="text-red-500 hover:text-red-400 mb-8 inline-block transition-colors duration-300 animate__animated animate__fadeInLeft">← Back to Mods</a>
+        
+        <div class="bg-black bg-opacity-50 rounded-lg p-8 border border-red-700">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Slideshow Section -->
+                <div class="space-y-4">
+                    <div class="slideshow-container">
+                        <div class="slides-wrapper" id="slidesWrapper">
+                            <div class="slide">
+                                <img src="https://i.postimg.cc/pT8nvTVP/CLRITYCOD1.png" alt="Call of Duty: BO6/Warzone Menu 1" class="w-full object-cover h-80"/>
+                            </div>
+                            <div class="slide">
+                                <img src="https://i.postimg.cc/TPKDk0ZL/CLRITYCOD2.png" alt="Call of Duty: BO6/Warzone Menu 2" class="w-full object-cover h-80"/>
+                            </div>
+                            <div class="slide">
+                                <img src="https://i.postimg.cc/8cSfzSsM/CLRITYCOD3.png" alt="Call of Duty: BO6/Warzone Menu 3" class="w-full object-cover h-80"/>
+                            </div>
+                        </div>
+                        
+                        <button class="slide-arrow prev" onclick="changeSlide(-1)">
+                            <span class="arrow-icon"></span>
+                        </button>
+                        <button class="slide-arrow next" onclick="changeSlide(1)">
+                            <span class="arrow-icon"></span>
+                        </button>
                     </div>
-                </div>
-                <p class="text-xs text-blue-400/70 mt-1 text-right">88% Scanned</p>
+                    
+                    <!-- Image Description -->
+                    <div class="bg-black bg-opacity-50 p-4 rounded-lg border border-red-700">
+                        <p class="text-gray-300" id="slideDescription">
+                           The BO6/Warzone tool provides an extensive array of advanced features and functionalities designed to enhance your gaming experience. These features include silent injection for discreet and seamless operation, ESP (Extra Sensory Perception) for improved situational awareness, and an aimbot for precise targeting. Additionally, it offers a money hack to boost in-game resources, a radar hack to detect opponents' locations, and a variety of other powerful options to give you a competitive edge.
+
+</p>
+
+<div class="h-8"></div>  <!-- Simple spacer -->
+
+<!-- Status Tiles -->
+<div class="grid grid-cols-3 gap-3 mb-6 animate-fade-in">
+    <!-- Online Status -->
+    <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 animate__animated animate__fadeInLeft animate__delay-1s">
+        <div class="flex items-center gap-2">
+            <div class="flex items-center">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
+                <h4 class="text-sm font-medium text-red-400">System Status</h4>
+            </div>
+            <span class="text-xs text-white/50 ml-auto">Online</span>
+        </div>
+    </div>
+
+    <!-- Success Rate -->
+    <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 animate__animated animate__fadeInLeft animate__delay-1.5s">
+        <div class="flex items-center gap-2">
+            <div class="text-xl">✨</div>
+            <div>
+                <h4 class="text-sm font-medium text-red-400">Success Rate</h4>
+                <p class="text-xs text-white/50">99.8% Clean</p>
             </div>
         </div>
-        <div class="grid grid-cols-4 gap-2 mt-2 animate-fade-in" style="animation-delay: 0.4s">
-            <div class="bg-black/20 rounded px-2 py-1 text-center hover:bg-blue-500/5 transition-colors duration-200">
-                <span class="text-xs text-blue-300/90">Malware: Clean</span>
-            </div>
-            <div class="bg-black/20 rounded px-2 py-1 text-center hover:bg-blue-500/5 transition-colors duration-200">
-                <span class="text-xs text-blue-300/90">Trojans: None</span>
-            </div>
-            <div class="bg-black/20 rounded px-2 py-1 text-center hover:bg-blue-500/5 transition-colors duration-200">
-                <span class="text-xs text-blue-300/90">Signatures: Valid</span>
-            </div>
-            <div class="bg-black/20 rounded px-2 py-1 text-center hover:bg-blue-500/5 transition-colors duration-200">
-                <span class="text-xs text-blue-300/90">Encrypted: Yes</span>
-            </div>
+    </div>
+
+    <!-- Auto Updates -->
+    <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 animate__animated animate__fadeInLeft animate__delay-2s">
+        <div class="flex items-center gap-2">
+            <div class="text-xl">⚡</div>
+            <div>
+                <h4 class="text-sm font-medium text-red-400">Auto Updates</h4>
+             </div>
         </div>
     </div>
 </div>
 
 <style>
-@keyframes slide-in-left {
+@keyframes animate-fade-in {
     from {
         opacity: 0;
-        transform: translateX(-10px);
+        transform: translateY(-10px);
     }
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
     }
-}
-
-@keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes progress-fill {
-    from { width: 0; }
-    to { width: 88%; }
-}
-
-@keyframes shine {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(100%);
-    }
-}
-
-.animate-slide-in-left {
-    animation: slide-in-left 0.4s ease-out forwards;
 }
 
 .animate-fade-in {
-    animation: fade-in 0.3s ease-out forwards;
+    animation: animate-fade-in 0.6s ease-out forwards;
 }
 
-.animate-progress-fill {
-    animation: progress-fill 1s ease-out forwards;
+@keyframes animate-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
-.animate-shine {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
-    animation: shine 1.5s infinite;
+.animate-pulse {
+    animation: animate-pulse 2s infinite;
 }
 </style>
 
-<div class="grid grid-cols-3 gap-6 mt-12 animate__animated animate__fadeInUp animate__delay-1s">
-    <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
-        <h2 class="text-yellow-400 text-glow text-xl font-bold" id="totalDownloads">0K+</h2>
-        <p class="text-red-400">Total Downloads</p>
-    </div>
-    <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
-        <h2 class="text-yellow-400 text-glow text-xl font-bold" id="averageRating">0.0</h2>
-        <p class="text-red-400">Average Rating</p>
-    </div>
-    <div class="stats-card bg-black bg-opacity-50 p-4 rounded-lg border border-red-700 text-center">
-        <h2 class="text-yellow-400 text-glow text-xl font-bold" id="totalMods">0</h2>
-        <p class="text-red-400">Total Mods</p>
+<!-- Key Features Section with Enhanced Descriptions -->
+<div class="space-y-4 animate__animated animate__fadeInUp animate__delay-1.5s">
+    <div>
+        <h2 class="text-xl font-semibold text-red-500 text-glow mb-2">Premium Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                <h3 class="text-red-400 font-medium mb-1">Advanced Stealth System</h3>
+                <p class="text-sm text-white/70">Military-grade silent injection with automated trace cleanup. Undetectable and secure.</p>
+            </div>
+            <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                <h3 class="text-red-400 font-medium mb-1">Enhanced Vision Suite</h3>
+                <p class="text-sm text-white/70">Next-gen ESP with customizable overlays and real-time threat detection.</p>
+            </div>
+            <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                <h3 class="text-red-400 font-medium mb-1">Precision Control</h3>
+                <p class="text-sm text-white/70">Advanced targeting system with customizable FOV, smoothing, and bone selection.</p>
+            </div>
+            <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                <h3 class="text-red-400 font-medium mb-1">Exclusive Features</h3>
+                <p class="text-sm text-white/70">Limited-edition Ray Gun access and complete loadout unlocks for Warzone.</p>
+            </div>
+        </div>
     </div>
 </div>
+                        </p>
+                    </div>
+                </div>
 
-<!-- Footer Button -->
-<div class="grid grid-cols-1 gap-6 mt-8 mb-12 animate__animated animate__fadeInUp animate__delay-1.5s">
-    <button onclick="window.location.href=' https://discord.gg/grbgfV5Dyp'" class="footer-button bg-black/50 hover:bg-red-900/50 px-4 py-2 rounded-sm text-sm text-gray-300 transition-all duration-300 hover:text-white border border-red-900/30 hover:border-red-500/50 flex items-center justify-center space-x-2">
-        <span>Discord</span>
-    </button>
-</div>
+                <!-- Product Info -->
+                <div class="space-y-6">
+                    <div>
+                        <h1 class="text-3xl font-bold text-red-500 text-glow mb-2 animate__animated animate__fadeInDown">Call of Duty: BO6/Warzone Menu</h1>
+                        <p class="text-red-400 animate__animated animate__fadeInDown animate__delay-0.5s">By ClarityServices™</p>
+                    </div>
+
+                    <div class="flex items-center space-x-4 animate__animated animate__fadeInUp animate__delay-1s">
+                        <div class="flex items-center">
+                            <span class="text-red-500 animate-pulse-slow">★</span>
+                            <span class="ml-1 text-red-400">3.4</span>
+                        </div>
+                        <span class="text-red-700">•</span>
+                        <span class="text-red-400">1.2K+ Downloads</span>
+                        <span class="bg-red-900 px-3 py-1 rounded-full text-sm animate-pulse-slow">v1.8</span>
+                    </div>
+
+                    <div class="space-y-4 animate__animated animate__fadeInUp animate__delay-1.5s">
+                        <div>
+                            <h2 class="text-xl font-semibold text-red-500 text-glow mb-2">Description</h2>
+                            <p class="text-gray-300 text-lg">
+                                The BO6/Warzone tool offers a wide range of features, including silent injection, ESP/aimbot, and much more.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-red-500 text-glow mb-2">Key Features</h3>
+                            <ul class="text-gray-300 space-y-2 list-disc pl-5">
+                                <li>Deep Clean + Silent injection</li>
+				<li>Auto Detects tracer files. Deltes</li>
+				<li>*LIMITED* Ray Gun ( Warzone Only )</li> 
+				<li>Radar Hack</li>
+                                <li>ESP/aimbot</li>
+                                <li>Rapid fire</li>
+                                <li>No recoil</li>
+                                <li>Unlock all</li>
+				<li>Aimbot FOV/Radius</li>
+				<li>Aimbot Smoothing</li>
+				<li>Aimbot Lock Delay</li>
+				<li>Hitbox/Bone Selection</li>
+				<li>Ignore Knockouts</li>
+				<li>Visibility Check</li>
+				<li>Bullet Drop Prediction</li>
+				<li>Aimbot Key Selection</li>
+				<li>Mouse/Controller Support</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-red-500 text-glow mb-2">System Requirements</h3>
+                            <ul class="text-gray-300 space-y-2 list-disc pl-5">
+                                <li>Windows 10/11 (64-bit)</li>
+                                <li>Latest GPU drivers</li>
+                                <li>Administrator access</li>
+                                <li>Anti-virus disabled during installation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex space-x-4 animate__animated animate__fadeInUp animate__delay-2s">
+                        <a href="https://download843.mediafire.com/jpsyexcbosqgmKFpU3J3cgzXUaivTF3nPko4sDvW_V5pZ9lIlhhb-ODwX5kuMt636tHBtn_e3vqq4h7YEHnvHzaZjyLVyaTJ8wHFJtJyBjpbsFjnRm5Z3xacPJJEi4cP5O_gM20Tc5wkg6wudJc3tcTtDtOHsgKxLHhMzGnhZ9AW1g/r0hsj8phz8tb58t/ClartiyCOD.zip" 
+   download="ClrtyBO6.zip" 
+   class="glow-button bg-red-800 hover:bg-red-900 px-8 py-3 rounded-lg text-white font-semibold transition-all duration-300 transform hover:-translate-y-1">
+    Download Now
+</a>
+
+                        <button onclick="showInstallGuide()"
+                                class="glow-button bg-red-800 hover:bg-red-900 px-8 py-3 rounded-lg text-white font-semibold transition-all duration-300 transform hover:-translate-y-1">
+                            Installation Guide
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Load sound effects
-        const hoverSound = new Audio('hover-sound.mp3');
-        const clickSound = new Audio('click-sound.mp3');
-        const welcomeSound = new Audio('welcome-sound.mp3');
+        let slideIndex = 0;
+        const slidesWrapper = document.getElementById('slidesWrapper');
+        const descriptions = [
+            "The BO6/Warzone tool provides an extensive array of advanced features and functionalities designed to enhance your gaming experience. These features include silent injection for discreet and seamless operation, ESP (Extra Sensory Perception) for improved situational awareness, and an aimbot for precise targeting. Additionally, it offers a money hack to boost in-game resources, a radar hack to detect opponents' locations, and a variety of other powerful options to give you a competitive edge.",
+            "Clarity Cheats offers the ultimate tool for BO6/Warzone, setting a new standard in performance and reliability. Our tool is meticulously crafted to deliver unmatched precision and functionality, featuring cutting-edge options like silent injection, ESP, aimbot, money hack, and radar hack. What truly sets Clarity Cheats apart is our commitment to providing seamless integration, undetectable operation, and consistent updates to stay ahead of anti-cheat systems.",
+            "The configuration panel for our game modifications is designed to provide unparalleled control and customization. It allows users to fine-tune every aspect of the tool, including ESP settings, aimbot precision, radar functionality, and more. With an intuitive and user-friendly interface, the panel ensures that both beginners and experienced users can effortlessly adjust settings to match their playstyle."
+        ];
 
-        // Play welcome sound on page load
-      window.addEventListener('load', () => {
-    // Play welcome sound on page load
-    welcomeSound.play();
-    
-    // Delay to hide the landing page and reveal the logo
-    setTimeout(() => {
-        // Hide the landing page after 1 second
-        document.getElementById('landing-page').classList.add('hidden');
-        
-        // Unblur the logo and make it visible
-        const logo = document.getElementById('logo');
-        logo.classList.add('unblurred');
-        
-        // Show the rest of the content
-        document.querySelector('.content-wrapper').style.opacity = '1';
-        
-        // Reveal each section with animations
-        document.querySelectorAll('.section-reveal').forEach(section => {
-            section.classList.add('visible');
-        });
-    }, 1000);  // Delay for 1 second before triggering the changes
-});
+        function changeSlide(direction) {
+            const slides = document.getElementsByClassName('slide');
+            slideIndex = (slideIndex + direction + slides.length) % slides.length;
+            
+            // Smooth slide transition
+            slidesWrapper.style.transform = `translateX(-${slideIndex * 100}%)`;
+            
+            // Update description
+            document.getElementById("slideDescription").textContent = descriptions[slideIndex];
+        }
 
+        function showInstallGuide() {
+            alert("Installation guide included in the download folder!");
+        }
 
-
-        // Play hover sound on card hover
-        document.querySelectorAll('.card-hover').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                hoverSound.play();
-            });
+        // Apply glow effect to text elements with the "text-glow" class
+        document.querySelectorAll('.text-glow').forEach(element => {
+            element.classList.add('animate__animated', 'animate__infinite', 'animate__zoomIn');
         });
 
-        // Play click sound on button click
-        document.querySelectorAll('button, a').forEach(element => {
-            element.addEventListener('click', () => {
-                clickSound.play();
-            });
+        // Apply pulse animation to elements with the "animate-pulse-slow" class
+        document.querySelectorAll('.animate-pulse-slow').forEach(element => {
+            element.classList.add('animate__animated', 'animate__infinite', 'animate__pulse');
         });
 
-        particlesJS('particles-js', {
-            "particles": {
-                "number": {
-                    "value": 60,
-                    "density": {
-                        "enable": true,
-                        "value_area": 1000
-                    }
-                },
-                "color": {
-                    "value": "#ff0000"
-                },
-                "shape": {
-                    "type": "circle"
-                },
-                "opacity": {
-                    "value": 0.3,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 0.5,
-                        "opacity_min": 0.1,
-                        "sync": true
-                    }
-                },
-                "size": {
-                    "value": 5,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 2,
-                        "size_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 200,
-                    "color": "#ff0000",
-                    "opacity": 0.2,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 1,
-                    "direction": "none",
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "bubble"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "bubble": {
-                        "distance": 200,
-                        "size": 6,
-                        "duration": 2,
-                        "opacity": 0.2,
-                        "speed": 3
-                    }
-                }
-            },
-            "retina_detect": true
-        });
-
-        // Smooth scroll to reviews section
-        document.querySelector('#reviewsSection').addEventListener('click', () => {
-            document.querySelector('.reviews-section').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        // Apply fade-in animations to other elements
+        document.querySelectorAll('.animate__animated').forEach(element => {
+            element.classList.add('animate__fadeIn');
         });
     </script>
-    <script src="script.js"></script>
 </body>
 </html>

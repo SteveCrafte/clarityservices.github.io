@@ -295,7 +295,6 @@ function createModCard(mod) {
                         <span class="flex h-2 w-2 rounded-full bg-green-500 mr-2"></span>
                         <span class="text-xs text-gray-400">Online</span>
                     </div>
-                    <span class="text-xs text-red-400">${(mod.downloads/1000).toFixed(1)}K+</span>
                 </div>
                 <a href="${mod.title === 'Fortnite Menu' ? 'fortnite.html' : 
                          mod.title === 'Call of Duty: BO6/Warzone Menu' ? 'cod.html' :

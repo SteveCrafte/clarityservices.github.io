@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarity's Apex Tool - Clarity Services™</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330000 50%, #660000 75%, #990000 100%);
+            min-height: 100vh;
+            color: white;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .fog-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(0deg, rgba(255,0,0,0.15) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 10;
+            filter: blur(20px);
+            box-shadow: 0 -10px 50px rgba(255,0,0,0.2);
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 10px currentColor;
+            animation: smoothGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes smoothGlow {
+            0% { text-shadow: 0 0 5px currentColor; }
+            50% { text-shadow: 0 0 15px currentColor, 0 0 20px red; }
+            100% { text-shadow: 0 0 5px currentColor; }
+        }
+        
+        .god-rays {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .ray {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 0, 0, 0.2), transparent);
+            animation: ray-animation 8s infinite;
+        }
+        
+        .ray:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .ray:nth-child(2) { left: 40%; animation-delay: 2s; }
+        .ray:nth-child(3) { left: 60%; animation-delay: 4s; }
+        .ray:nth-child(4) { left: 80%; animation-delay: 6s; }
+        .ray:nth-child(5) { left: 90%; animation-delay: 8s; }
+        
+        @keyframes ray-animation {
+            0% { transform: translateY(-100%); opacity: 0; }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.3; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .slides-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            display: block;
+            opacity: 1;
+        }
+
+        .slide-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            border-radius: 50%;
+        }
+
+        .slide-arrow:hover {
+            background: rgba(255, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+
+        .slide-arrow.prev { left: 15px; }
+        .slide-arrow.next { right: 15px; }
+
+        .arrow-icon {
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+
+        .arrow-icon::before,
+        .arrow-icon::after {
+            content: '';
+            position: absolute;
+            background: white;
+            height: 2px;
+            width: 12px;
+        }
+
+        .prev .arrow-icon::before {
+            transform: rotate(-45deg);
+            top: 25%;
+            left: 25%;
+        }
+
+        .prev .arrow-icon::after {
+            transform: rotate(45deg);
+            top: 65%;
+            left: 25%;
+        }
+
+        .next .arrow-icon::before {
+            transform: rotate(45deg);
+            top: 25%;
+            right: 25%;
+        }
+
+        .next .arrow-icon::after {
+            transform: rotate(-45deg);
+            top: 65%;
+            right: 25%;
+        }
+
+        .glow-button {
+            animation: smoothButtonGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes smoothButtonGlow {
+            0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); }
+            100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
+        }
+    </style>
+</head>
+<body>
+    <div class="god-rays">
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+        <div class="ray"></div>
+    </div>
+
+    <div class="fog-container"></div>
+
+    <div class="container mx-auto px-4 py-8">
+        <a href="index.html" class="text-red-500 hover:text-red-400 mb-8 inline-block transition-colors duration-300 animate__animated animate__fadeInLeft hover-animate">← Back to Mods</a>
+        
+        <div class="bg-black bg-opacity-50 rounded-lg p-8 border border-red-700">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Slideshow Section -->
+                <div class="space-y-4">
+                    <div class="slideshow-container">
+                        <div class="slides-wrapper" id="slidesWrapper">
+                            <div class="slide">
+                                <img src="https://i.postimg.cc/59wvxSX5/22222.png" alt="Fortnite Menu 1" class="w-full object-cover h-80"/>
+                            </div>
+                            <div class="slide">
+                                <img src="https://i.postimg.cc/yNMgKDBr/444.png" alt="Fortnite Menu 2" class="w-full object-cover h-80"/>
+                            </div>
+                            <div class="slide">
+                                <img src="https://i.postimg.cc/JztGBNz2/12.png" alt="Fortnite Menu 3" class="w-full object-cover h-80"/>
+                            </div>
+                        </div>
+                        
+                        <button class="slide-arrow prev" onclick="changeSlide(-1)">
+                            <span class="arrow-icon"></span>
+                        </button>
+                        <button class="slide-arrow next" onclick="changeSlide(1)">
+                            <span class="arrow-icon"></span>
+                        </button>
+                    </div>
+                    
+                    <!-- Image Description -->
+                    <div class="bg-black bg-opacity-50 p-4 rounded-lg border border-red-700">
+                        <p class="text-gray-300" id="slideDescription">
+                            Unleash the full power of Apex Legends with our advanced menu, packed with customizable aimbot, ESP, and combat settings designed to give you the ultimate edge. Our aimbot is fully adjustable, allowing you to fine-tune smoothness, FOV, and target selection for the most precise shots every time.
+                        </p>
+                        
+                        <div class="h-8"></div>  <!-- Simple spacer -->
+                        
+                        <!-- Status Tiles -->
+                        <div class="grid grid-cols-3 gap-3 mb-6 animate-fade-in">
+                            <!-- Anti-Cheat Status -->
+                            <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 animate__animated animate__fadeInLeft animate__delay-1s">
+                                <div class="flex items-center gap-2">
+                                    <div class="flex items-center">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
+                                        <h4 class="text-sm font-medium text-red-400">Anti-Cheat Status</h4>
+                                    </div>
+
+                                </div>
+                            </div>
+                        
+                            <!-- HWID Spoofer -->
+                            <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 animate__animated animate__fadeInLeft animate__delay-1.5s">
+                                <div class="flex items-center gap-2">
+                                    <div class="text-xl">💉</div>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-red-400">Silent Injection</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!-- Chapter Updates -->
+                            <div class="bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg p-3 hover:border-red-500/30 transition-all duration-200 animate__animated animate__fadeInLeft animate__delay-2s">
+                                <div class="flex items-center gap-2">
+                                    <div class="text-xl">🆕</div>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-red-400">Auto Updates</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Premium Features Section -->
+                        <div class="space-y-4 animate__animated animate__fadeInUp animate__delay-1.5s">
+                            <div>
+                                <h2 class="text-xl font-semibold text-red-500 text-glow mb-2">Premium Features</h2>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                                        <h3 class="text-red-400 font-medium mb-1">Silent Aim System</h3>
+                                        <p class="text-sm text-white/70">Advanced targeting with customizable smoothness, FOV, and bullet prediction for perfect accuracy.</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                                        <h3 class="text-red-400 font-medium mb-1">Enhanced Player ESP</h3>
+                                        <p class="text-sm text-white/70">Complete visibility of enemies, items, chests, and supply drops through walls with distance indicators.</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                                        <h3 class="text-red-400 font-medium mb-1">Movement Enhancement</h3>
+                                        <p class="text-sm text-white/70">Custom speed modifier, instant build mode, and automatic resource gathering capabilities.</p>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded-lg border border-red-700/30">
+                                        <h3 class="text-red-400 font-medium mb-1">Exclusive Options</h3>
+                                        <p class="text-sm text-white/70">Auto-heal, instant revive, storm warning system, and rare item alerts.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="space-y-6">
+                    <div>
+                        <h1 class="text-3xl font-bold text-red-500 text-glow mb-2 animate__animated animate__fadeInDown hover-animate">Clarity's Apex Tool</h1>
+                        <p class="text-red-400">By ClarityServices™</p>
+                    </div>
+
+                    <div class="flex items-center space-x-4 animate__animated animate__fadeInUp animate__delay-1s">
+                        <div class="flex items-center hover-animate">
+                            <span class="text-red-500 animate-pulse-slow">★</span>
+                            <span class="ml-1 text-red-400">3.7</span>
+                        </div>
+                        <span class="text-red-700">•</span>
+                        <span class="text-red-400 hover-animate">900+ Downloads</span>
+                        <span class="bg-red-900 px-3 py-1 rounded-full text-sm animate-pulse-slow hover-animate">v2.1</span>
+                    </div>
+
+                    <div class="space-y-4 animate__animated animate__fadeInUp animate__delay-1.5s">
+                        <div>
+                            <h2 class="text-xl font-semibold text-red-500 text-glow mb-2 hover-animate">Description</h2>
+                            <p class="text-gray-300 text-lg">
+                                A Stealth/Silent launcher with the latest and most up-to-date Injection/Detection settings, we guarantee 100% undetection, or reach out, and a new account will be provided to you.
+                            </p>
+                        </div>
+                        
+                        <div>
+<h3 class="text-lg font-semibold text-red-500 text-glow mb-2 hover-animate">Key Features</h3>
+                            <ul class="text-gray-300 space-y-2 list-disc pl-5">
+                                <li>Undetected Aimbot | Customizable smoothness and FOV</li>
+                                <li>Full ESP features including player boxes</li>
+                                <li>Speed hack</li>
+                                <li>Rapid fire and no recoil options</li>
+                                <li>Chest Hack/Vault ( NO KEY )</li>
+				<li>Spawn Armor drops</li>
+				<li>Full Radar Hack</li>
+				<li>Give Heirloom Shards ( Cap 500 ) *SERVER RESTRICTION* </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-red-500 text-glow mb-2 hover-animate">System Requirements</h3>
+                            <ul class="text-gray-300 space-y-2 list-disc pl-5">
+                                <li>Windows 10/11 (64-bit)</li>
+                                <li>Latest GPU/CPU drivers</li>
+                                <li>Administrator access</li>
+                                <li>Anti-virus disabled during installation!</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex space-x-4 animate__animated animate__fadeInUp animate__delay-2s">
+                        <a href="https://download1503.mediafire.com/u8y9n5fk6jlg_y9B0FVYJ5KLxbiwKE8UaoeqPD4zU8U5yp6rw3UEQbDESrfl_2qIvvfumdQ__LLnlOc2_PzInnjRrn30Qeej7XPkFcWcHylpavEIboLChyE9ctkBVbgSOfKa0tqlfwV3Kz2HgpARQYm51NZTx5nXr0AVFGaKGnC85Heynw/7wc73gcx70vwe8i/ClarityApex.rar"
+                           download="ClrtyFortnite.zip"
+                           class="glow-button bg-red-800 hover:bg-red-900 px-8 py-3 rounded-lg text-white font-semibold transition-all duration-300 transform hover:-translate-y-1">
+                            Download Now
+                        </a>
+
+                        <button onclick="showInstallGuide()"
+                                class="glow-button bg-red-800 hover:bg-red-900 px-8 py-3 rounded-lg text-white font-semibold transition-all duration-300 transform hover:-translate-y-1">
+                            Installation Guide
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        const slidesWrapper = document.getElementById('slidesWrapper');
+        const descriptions = [
+            "Packed with peronalization features designed to give you the ultimate edge. Our aimbot/ESP is fully adjustable, allowing you to fine-tune smoothness, FOV, and target selection for the most precise shots every time, similar to our other cheats..",
+            "Customizable FOV, and bullet prediction, you'll dominate the battlefield with perfect accuracy. Our enhanced player ESP provides complete visibility of enemies, items, chests, and supply drops, giving you a strategic advantage in every encounter.",
+            "Our premium features, including auto-heal, instant revive, circle alerts, and rare/legendary item alerts ensure you're always one step ahead. Try this tools many features now and in comparsion, you will agree, that the Clarity Apex tool is unmatched."
+        ];
+
+        function changeSlide(direction) {
+            const slides = document.getElementsByClassName('slide');
+            slideIndex = (slideIndex + direction + slides.length) % slides.length;
+            
+            // Smooth slide transition
+            slidesWrapper.style.transform = `translateX(-${slideIndex * 100}%)`;
+            
+            // Update description
+            document.getElementById("slideDescription").textContent = descriptions[slideIndex];
+        }
+
+        function showInstallGuide() {
+            alert("Installation guide included in the download folder!");
+        }
+    </script>
+</body>
+</html>

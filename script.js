@@ -9,7 +9,7 @@ let mods = [
         rating: 4.1,              
         downloads: 1200,         
         date: "2024-01-18",       
-        image: "https://i.postimg.cc/MKT30Dd7/Fortnite.png",  
+        image: "https://i.postimg.cc/jjxDMH8K/Opera-Snapshot-2024-11-28-131708-pixlr-com.png",  
         downloadUrl: "https://gofile.io/d/O1OasU"  
     },
     {
@@ -21,7 +21,7 @@ let mods = [
         rating: 3.9,
         downloads: 1200,
         date: "2024-05-15",
-        image: "https://i.postimg.cc/MZ4V4mzb/blackops6.png",
+        image: "https://i.postimg.cc/QMm6FZYD/s.png",
         downloadUrl: "https://gofile.io/d/5MSaxP"
     },    
     {
@@ -33,9 +33,46 @@ let mods = [
         rating: 3.4,
         downloads: 1000,
         date: "2024-11-4",
-        image: "https://i.postimg.cc/qRWc8sRL/HWIDSPOOFER.png",
+        image: "https://i.postimg.cc/ry7LV5tJ/asdasdasdasdasd.png",
         downloadUrl: "https://gofile.io/d/M1ElNC"
-    }    
+    },
+    // Add the new mods here
+    {
+        id: 4,
+        title: "Roblox Tools",
+        author: "ClarityServices™",
+        version: "v1.2",
+        description: "Premium Roblox tools including silent aim, ESP, and more. Features undetected methods and regular updates.",
+        rating: 4.0,
+        downloads: 1200,
+        date: "2024-11-4",
+        image: "https://i.postimg.cc/B6jr6SHP/ROBLOX.jpg",
+        downloadUrl: "#"
+    },
+    {
+        id: 5,
+        title: "Apex Tools",
+        author: "ClarityServices™",
+        version: "v2.0",
+        description: "Complete Apex Legends toolkit featuring advanced aimbot, ESP, radar hacks, and undetectable modifications.",
+        rating: 4.2,
+        downloads: 950,
+        date: "2024-11-4",
+        image: "https://i.postimg.cc/BQYgnTZb/APEX.jpg",
+        downloadUrl: "#"
+    },
+    {
+        id: 6,
+        title: "GTA Tools",
+        author: "ClarityServices™",
+        version: "v1.5",
+        description: "Ultimate GTA toolkit with money mods, vehicle mods, and anti-ban features. Regular updates and full optimization.",
+        rating: 4.3,
+        downloads: 800,
+        date: "2024-11-4",
+        image: "https://i.postimg.cc/kMbrP57k/gta5.png",
+        downloadUrl: "#"
+    }
 ];
 
 // ===== UPDATE DATA =====
@@ -144,37 +181,60 @@ let reviews = [
 // ===== MOD CARD CREATION =====
 function createModCard(mod) {
     return `
-        <div class="card-hover bg-black bg-opacity-50 rounded-lg overflow-hidden border border-red-700 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300">
-            <div class="relative">
-                <img src="${mod.image}" alt="${mod.title}" class="w-full h-40 object-cover transform hover:scale-105 transition-transform duration-300"/>
-                <div class="absolute top-2 right-2 flex items-center space-x-2">
-                    <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-lg shadow-green-500/80" 
-                         style="box-shadow: 0 0 10px #22c55e, 0 0 20px #22c55e, 0 0 30px #22c55e;"></div>
-                    <span class="bg-red-900 px-2 py-0.5 rounded-full text-xs text-white">${mod.version}</span>
+        <div class="relative card-hover bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-red-500/20">
+            <img src="${mod.image}" alt="${mod.title}" class="w-full h-32 object-cover rounded-lg mb-3">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-base font-semibold text-red-400">${mod.title}</h3>
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 text-xs bg-gradient-to-r from-red-500/20 to-red-500/10 text-red-400 rounded-full">${mod.version}</span>
                 </div>
             </div>
-            <div class="p-4">
-                <div class="mb-2">
-                    <h3 class="text-lg font-semibold text-red-500 hover:text-red-400 transition-colors duration-300">${mod.title}</h3>
-                    <p class="text-xs text-gray-500 opacity-60">By ${mod.author}</p>
-                </div>
-                <p class="text-sm text-gray-300 mb-4 hover:text-red-400 transition-colors duration-300">${mod.description}</p>
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center space-x-2">
-                        <span class="text-yellow-400 text-glow">${mod.rating}</span>
-                        <span class="text-red-700">•</span>
-                        <span class="text-red-400">${(mod.downloads/1000).toFixed(0)}K+</span>
+            <p class="text-xs text-gray-300 mb-3 line-clamp-2">${mod.description}</p>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center">
+                        <span class="flex h-2 w-2 rounded-full bg-green-500 mr-2"></span>
+                        <span class="text-xs text-gray-400">Online</span>
                     </div>
-                    <button onclick="viewMod(${mod.id})" 
-                            class="bg-red-800 hover:bg-red-900 hover:shadow-lg hover:shadow-red-500/50 px-3 py-1 rounded text-sm text-white transition-all duration-300 transform hover:-translate-y-1 glow-button">
-                        View More
-                    </button>
+                    <span class="text-xs text-red-400">${(mod.downloads/1000).toFixed(1)}K+</span>
                 </div>
+                <button onclick="viewMod(${mod.id})" 
+                        class="px-3 py-1 text-xs bg-red-500/20 text-red-400 rounded hover:bg-red-500/30 transition-all duration-300">
+                    View Details
+                </button>
             </div>
         </div>
     `;
 }
 
+// ===== MOD CARD CREATION =====
+function createModCard(mod) {
+    return `
+        <div class="relative card-hover bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-red-500/20">
+            <img src="${mod.image}" alt="${mod.title}" class="w-full h-32 object-cover rounded-lg mb-3">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-base font-semibold text-red-400">${mod.title}</h3>
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 text-xs bg-gradient-to-r from-red-500/20 to-red-500/10 text-red-400 rounded-full">${mod.version}</span>
+                </div>
+            </div>
+            <p class="text-xs text-gray-300 mb-3 line-clamp-2">${mod.description}</p>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center">
+                        <span class="flex h-2 w-2 rounded-full bg-green-500 mr-2"></span>
+                        <span class="text-xs text-gray-400">Online</span>
+                    </div>
+                    <span class="text-xs text-red-400">${(mod.downloads/1000).toFixed(1)}K+</span>
+                </div>
+                <button onclick="viewMod('${mod.title}')"
+                        class="px-3 py-1 text-xs bg-red-500/20 text-red-400 rounded hover:bg-red-500/30 transition-all duration-300">
+                    View Details
+                </button>
+            </div>
+        </div>
+    `;
+}
 // ===== UPDATE CARD CREATION =====
 function createUpdateCard(update) {
     const mod = mods.find(m => m.id === update.modId);
@@ -218,18 +278,59 @@ function createReviewCard(review) {
 }
 
 // ===== VIEW MOD FUNCTION =====
-function viewMod(modId) {
-    const mod = mods.find(m => m.id === modId);
-    if (!mod) {
-        console.error(`Mod with ID ${modId} not found`);
-        return;
-    }
-    if (modId === 1) {
-        window.location.href = 'fortnite.html';
-    } else if (modId === 2) {
-        window.location.href = 'cod.html';
-    } else if (modId === 3) {
-        window.location.href = 'spoofer.html';
+function createModCard(mod) {
+    return `
+        <div class="relative card-hover bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-red-500/20">
+            <img src="${mod.image}" alt="${mod.title}" class="w-full h-32 object-cover rounded-lg mb-3">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-base font-semibold text-red-400">${mod.title}</h3>
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 text-xs bg-gradient-to-r from-red-500/20 to-red-500/10 text-red-400 rounded-full">${mod.version}</span>
+                </div>
+            </div>
+            <p class="text-xs text-gray-300 mb-3 line-clamp-2">${mod.description}</p>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center">
+                        <span class="flex h-2 w-2 rounded-full bg-green-500 mr-2"></span>
+                        <span class="text-xs text-gray-400">Online</span>
+                    </div>
+                    <span class="text-xs text-red-400">${(mod.downloads/1000).toFixed(1)}K+</span>
+                </div>
+                <a href="${mod.title === 'Fortnite Menu' ? 'fortnite.html' : 
+                         mod.title === 'Call of Duty: BO6/Warzone Menu' ? 'cod.html' :
+                         mod.title === '*NEW* HWID Spoofer' ? 'spoofer.html' :
+                         mod.title === 'Roblox Tools' ? 'roblox.html' :
+                         mod.title === 'Apex Tools' ? 'apex.html' :
+                         mod.title === 'GTA Tools' ? 'gta.html' : '#'}"
+                   class="px-3 py-1 text-xs bg-red-500/20 text-red-400 rounded hover:bg-red-500/30 transition-all duration-300">
+                    View Details
+                </a>
+            </div>
+        </div>
+    `;
+}
+
+function viewMod(modTitle) {
+    switch (modTitle) {
+        case 'Fortnite Menu':
+            window.location.href = 'fortnite.html';
+            break;
+        case 'Call of Duty: BO6/Warzone Menu':
+            window.location.href = 'cod.html';
+            break;
+        case '*NEW* HWID Spoofer':
+            window.location.href = 'spoofer.html';
+            break;
+        case 'Roblox Tools':
+            window.location.href = 'roblox.html';
+            break;
+        case 'Apex Tools':
+            window.location.href = 'apex.html';
+            break;
+        case 'GTA Tools':
+            window.location.href = 'gta.html';
+            break;
     }
 }
 
@@ -313,6 +414,7 @@ function renderFooter() {
         </div>
     `;
 }
+
 
 
 // ===== EVENT LISTENERS =====
